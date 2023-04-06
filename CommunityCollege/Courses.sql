@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].Courses
+(
+	[Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY, 
+    [CourseName] NVARCHAR(50) NOT NULL
+)

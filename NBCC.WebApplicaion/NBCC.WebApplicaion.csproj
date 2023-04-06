@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<RootNamespace>NBCC.WebApplicaion</RootNamespace>
+		<EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+		<Authors>AUTHOR</Authors>
+		<Company>NBCC</Company>
+		<Product>PROJECT</Product>
+		<Description>DESCRIPTION</Description>
+		<NeutralLanguage>en-CA</NeutralLanguage>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="MediatR" Version="12.0.1" />
+		<PackageReference Include="Scrutor" Version="4.2.2" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\NBCC.Authorization\NBCC.Authorization.csproj" />
+	  <ProjectReference Include="..\NBCC.Courses\NBCC.Courses.csproj" />
+	  <ProjectReference Include="..\NBCC.CQRS\NBCC.CQRS.csproj" />
+	  <ProjectReference Include="..\NBCC.CustomMiddleware\NBCC.CustomMiddleware.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Microsoft.AspNetCore.Authentication" />
+		<Using Include="NBCC.Authorization" />
+		<Using Include="MediatR" />
+		<Using Include="System.Net.Mime" />
+		<Using Include="System" />
+		<Using Include="System.Collections.Generic" />
+		<Using Include="System.Linq" />
+		<Using Include="System.Threading.Tasks" />
+		<Using Include="Microsoft.AspNetCore.Authorization" />
+		<Using Include="Microsoft.AspNetCore.Mvc" />
+	</ItemGroup>
+
+</Project>
