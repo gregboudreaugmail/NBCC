@@ -3,10 +3,11 @@
 public class HashSalt
 {
     public byte[] Hash { get; private set; }
-    public byte[] Salt { get; private set; }
-    public HashSalt(byte[] hash, byte[] salt)
+    public byte[] Password { get; private set; }
+    public HashSalt() { }
+    public HashSalt(byte[] hash, byte[] password)
     {
         Hash = hash;
-        Salt = salt;
+        Password = password;
     }
 }

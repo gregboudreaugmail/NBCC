@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection.Extensions;
 using NBCC.Authorizaion;
+using NBCC.Authorizaion.DataAccess;
 using NBCC.Courses.CommandHandlers;
 using NBCC.Courses.Commands;
 using NBCC.Courses.DataAccess;
@@ -19,15 +20,17 @@ public class Startup
         services.AddControllers();
         services.AddHttpContextAccessor();
         services.AddEndpointsApiExplorer();
-        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
         services.AddSwaggerGen(OpenApi.AddAuthentication());
         services.AddScoped<IAuthenticatedUser, AuthenticatedUser>();
         services.AddTransient<ICourseRepository, CourseRepository>();
         services.TryAddSingleton<IQueryDispatcher, QueryDispatcher>();
         services.TryAddSingleton<ICommandDispatcher, CommandDispatcher>();
         services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
         services.AddTransient<ICommandHandler<CoursesCommand>, CoursesCommandHandler>();
         services.TryAddSingleton(new Connection(Configuration["ConnectionStrings:Connection"] ?? ""));
+        services.TryAddSingleton(new AuthenticationConnection(Configuration["ConnectionStrings:Connection"] ?? ""));
         services.AddAuthentication(BASIC_AUTHENTICATION)
                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(BASIC_AUTHENTICATION, null);
     }

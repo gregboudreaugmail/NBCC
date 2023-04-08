@@ -1,0 +1,1 @@
+Select [hash],[password] from users where username=@userName
