@@ -60,4 +60,7 @@
   <ItemGroup>
     <Build Include="Courses.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Users.sql" />
+  </ItemGroup>
 </Project>

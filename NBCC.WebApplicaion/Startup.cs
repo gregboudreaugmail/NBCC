@@ -15,25 +15,21 @@ public class Startup
     public Startup(IConfiguration configuration) => Configuration = configuration;
 
     public void ConfigureServices(IServiceCollection services)
-    {
+    {       
         services.AddControllers();
-        services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen(OpenApi.AddAuthentication());
-        services.AddAuthentication(BASIC_AUTHENTICATION)
-        .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(BASIC_AUTHENTICATION, null);
-
-        services.AddLogging();
-        services.AddScoped<IUserService, UserService>();
-
-        services.AddScoped<IAuthenticatedUser, AuthenticatedUser>();
         services.AddHttpContextAccessor();
-        services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-        services.TryAddSingleton(new Connection(Configuration["ConnectionStrings:Connection"] ?? ""));
+        services.AddEndpointsApiExplorer();
+        services.AddScoped<IUserService, UserService>();
+        services.AddSwaggerGen(OpenApi.AddAuthentication());
+        services.AddScoped<IAuthenticatedUser, AuthenticatedUser>();
         services.AddTransient<ICourseRepository, CourseRepository>();
-        services.TryAddSingleton<ICommandDispatcher, CommandDispatcher>();
         services.TryAddSingleton<IQueryDispatcher, QueryDispatcher>();
+        services.TryAddSingleton<ICommandDispatcher, CommandDispatcher>();
+        services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddTransient<ICommandHandler<CoursesCommand>, CoursesCommandHandler>();
-
+        services.TryAddSingleton(new Connection(Configuration["ConnectionStrings:Connection"] ?? ""));
+        services.AddAuthentication(BASIC_AUTHENTICATION)
+               .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(BASIC_AUTHENTICATION, null);
     }
     public void Configure(IApplicationBuilder app)
     {
