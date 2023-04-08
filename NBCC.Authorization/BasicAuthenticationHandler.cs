@@ -1,20 +1,18 @@
 ﻿using NBCC.Authorizaion;
+using NBCC.Authorizaion.DataAccess;
 
 namespace NBCC.Authorization;
 
 public sealed class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
-    IUserService UserService { get; }
+    IAuthenticationRepository AuthenticationRepository { get; }
 
-    public BasicAuthenticationHandler(IUserService userService,
+    public BasicAuthenticationHandler(IAuthenticationRepository authenticationRepository,
         IOptionsMonitor<AuthenticationSchemeOptions> options,
         ILoggerFactory logger,
         UrlEncoder encoder,
         ISystemClock clock)
-        : base(options, logger, encoder, clock)
-    {
-        UserService = userService;
-    }
+        : base(options, logger, encoder, clock) => AuthenticationRepository = authenticationRepository;
 
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
@@ -23,15 +21,13 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
         {
             var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
             if (authHeader == null)
-            {
                 return await Task.FromResult(AuthenticateResult.Fail("Authentication failed"));
-            }
 
             var credentials = Encoding.UTF8.GetString(Convert.FromBase64String(authHeader.Parameter ?? string.Empty)).Split(':');
             username = credentials.FirstOrDefault() ?? string.Empty;
             var password = credentials.LastOrDefault() ?? string.Empty;
 
-            if (!UserService.ValidateCredentials(username, password))
+            if (!await AuthenticationRepository.ValidateCredentials(username, password))
                 throw new ArgumentException("Invalid credentials");
         }
         catch (Exception ex)
