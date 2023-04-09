@@ -1,1 +1,1 @@
-Select [hash],[password] from users where username=@userName
+Select [hash],[password] from users where username=@userName and IsActive=1

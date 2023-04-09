@@ -1,5 +1,4 @@
-﻿using System.Net.WebSockets;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 
 namespace NBCC.Authorization;
 public sealed class Authentiate

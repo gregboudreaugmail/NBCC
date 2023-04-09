@@ -25,6 +25,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\NBCC.CQRS\NBCC.CQRS.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Using Include="Microsoft.AspNetCore.Authentication" />
 		<Using Include="Microsoft.Extensions.Logging" />
 		<Using Include="Microsoft.Extensions.Options" />

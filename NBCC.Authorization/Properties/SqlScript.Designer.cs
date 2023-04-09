@@ -61,11 +61,46 @@ namespace NBCC.Authorizaion.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select [hash],[password] from users where username=@userName.
+        ///   Looks up a localized string similar to Declare @LastID INT
+        ///Declare @DefaultID INT
+        ///
+        ///INSERT Secure.Users (UserName, [Password], [Hash])
+        ///VALUES (@UserName, @Password, @Hash)
+        ///
+        ///SET @LastID = SCOPE_IDENTITY()
+        ///
+        ///SELECT @DefaultID = RoleID FROM Secure.Roles WHERE IsDefault = 1
+        ///
+        ///INSERT INTO [Secure].[UserRoles]
+        ///           ([UserID]
+        ///           ,[RoleID])
+        ///     VALUES
+        ///           (@LastID, @DefaultID)
+        ///
+        ///.
+        /// </summary>
+        internal static string INSERT_User {
+            get {
+                return ResourceManager.GetString("INSERT_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select [hash],[password] from users where username=@userName and IsActive=1.
         /// </summary>
         internal static string SELECT_passwordByUserName {
             get {
                 return ResourceManager.GetString("SELECT_passwordByUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT RoleID, RoleName, IsDefault FROM Secure.Roles
+        ///WHERE RoleID = @RoleID OR @RoleID IS NULL.
+        /// </summary>
+        internal static string SELECT_Roles {
+            get {
+                return ResourceManager.GetString("SELECT_Roles", resourceCulture);
             }
         }
     }

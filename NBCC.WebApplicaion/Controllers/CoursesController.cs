@@ -1,4 +1,5 @@
-﻿using NBCC.Courses.Commands;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
+using NBCC.Courses.Commands;
 using System.ComponentModel.DataAnnotations;
 
 namespace NBCC.WebApplicaion.Controllers;
@@ -11,17 +12,16 @@ public sealed class CoursesController : ControllerBase
     public CoursesController(ICommandDispatcher messages) => Messages = messages ?? throw new ArgumentNullException(nameof(messages));
 
     [HttpPost]
-    [Authorize]
     [Consumes(MediaTypeNames.Application.Json)]
-    [Produces(MediaTypeNames.Application.Json)]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Post))]
     public async Task<IActionResult> Post([Required][MaxLength(50)] string courseName)
     {
         await Messages.Dispatch(new CoursesCommand(courseName));
-        return Ok();
+        return Created(new Uri(Request.Path, UriKind.Relative), courseName);
     }
 }

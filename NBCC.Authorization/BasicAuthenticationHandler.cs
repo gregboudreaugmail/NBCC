@@ -1,5 +1,4 @@
-﻿using NBCC.Authorizaion;
-using NBCC.Authorizaion.DataAccess;
+﻿using NBCC.Authorizaion.DataAccess;
 
 namespace NBCC.Authorization;
 
@@ -36,7 +35,8 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
         }
 
         var claims = new[] {
-            new Claim(ClaimTypes.Name, username)
+            new Claim(ClaimTypes.Name, username),
+            new Claim(ClaimTypes.Role, Roles.Administrators)
         };
         var identity = new ClaimsIdentity(claims, Scheme.Name);
         var principal = new ClaimsPrincipal(identity);
@@ -45,4 +45,8 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
         return await Task.FromResult(AuthenticateResult.Success(ticket));
     }
 
+}
+public static class Roles
+{
+    public const string Administrators = "Administrators";
 }

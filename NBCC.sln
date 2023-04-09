@@ -17,7 +17,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "CommunityCollege", "Communi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{F6E11617-7484-4261-B308-7CA481D60C26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBCC.CustomMiddleware", "NBCC.CustomMiddleware\NBCC.CustomMiddleware.csproj", "{E2C4DD3A-2A6F-4D01-851D-8401FCDBB0E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NBCC.CustomMiddleware", "NBCC.CustomMiddleware\NBCC.CustomMiddleware.csproj", "{E2C4DD3A-2A6F-4D01-851D-8401FCDBB0E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
