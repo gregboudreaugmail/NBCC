@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget Packages", "Nuget Pac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NBCC.Authorization", "NBCC.Authorization\NBCC.Authorization.csproj", "{946931D5-B80A-451D-B5FB-EBF4B7DAC80E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NBCC.WebApplicaion", "NBCC.WebApplicaion\NBCC.WebApplicaion.csproj", "{5AD9096B-DA43-4899-AA42-FA685FFB4A3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NBCC.WebApplication", "NBCC.WebApplicaion\NBCC.WebApplication.csproj", "{5AD9096B-DA43-4899-AA42-FA685FFB4A3F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NBCC.Courses", "NBCC.Courses\NBCC.Courses.csproj", "{A7002800-D9ED-416F-B937-160AC6608B6A}"
 EndProject

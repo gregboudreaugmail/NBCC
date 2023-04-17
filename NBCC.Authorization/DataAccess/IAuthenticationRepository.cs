@@ -2,5 +2,6 @@
 
 public interface IAuthenticationRepository
 {
-    Task<bool> ValidateCredentials(string username, string password);
+    Task<User?> GetUser(string userName);
+    Task<bool> AuthenticateUser(string userName, string password);
 }

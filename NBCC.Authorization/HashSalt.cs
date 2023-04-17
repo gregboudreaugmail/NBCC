@@ -2,8 +2,8 @@
 
 public class HashSalt
 {
-    public byte[] Hash { get; private set; }
-    public byte[] Password { get; private set; }
+    public byte[] Hash { get; } = new byte[32];
+    public byte[] Password { get; } = new byte[32];
     public HashSalt() { }
     public HashSalt(byte[] hash, byte[] password)
     {

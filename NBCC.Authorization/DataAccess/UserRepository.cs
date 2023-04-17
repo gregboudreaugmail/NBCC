@@ -12,11 +12,17 @@ namespace NBCC.Authorizaion.DataAccess
         public UserRepository(AuthenticationConnection connection) =>
             Connection = connection ?? throw new ArgumentNullException(nameof(connection));
 
-        public async Task Create(string userName, string password)
+        public async Task Create(string userName, string password, string email)
         {
             await using SqlConnection connection = new(Connection.Value);
             var credentials = Authentiate.GenerateSaltedHash(password);
-            await connection.ExecuteAsync(SqlScript.INSERT_User, new { userName, credentials.Password, credentials.Hash });
+            await connection.ExecuteAsync(SqlScript.INSERT_User, new
+            {
+                userName,
+                email,
+                credentials.Password,
+                credentials.Hash
+            });
         }
     }
 }

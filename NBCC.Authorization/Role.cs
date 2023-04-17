@@ -2,9 +2,9 @@
 {
     public sealed class Role
     {
-        public int RoleID { get; private set; }
-        public string RoleName { get; private set; }
-        public bool IsDefault { get; private set; }
+        public int RoleID { get; set; }
+        public string RoleName { get; } = string.Empty;
+        public bool IsDefault { get; }
         public Role() { }
         public Role(int roleID, string roleName, bool isDefault)
         {

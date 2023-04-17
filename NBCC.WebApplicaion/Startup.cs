@@ -20,7 +20,7 @@ public class Startup
     public Startup(IConfiguration configuration) => Configuration = configuration;
 
     public void ConfigureServices(IServiceCollection services)
-    {       
+    {
         services.AddControllers();
         services.AddHttpContextAccessor();
         services.AddEndpointsApiExplorer();
@@ -41,14 +41,15 @@ public class Startup
         services.AddAuthentication(BASIC_AUTHENTICATION)
                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(BASIC_AUTHENTICATION, null);
     }
+
     public void Configure(IApplicationBuilder app)
     {
+        app.UseCustomMiddleware();
         app.UseSwagger()
            .UseSwaggerUI()
            .UseRouting()
            .UseAuthentication()
            .UseAuthorization()
-           .UseEndpoints(_ => _.MapControllers())
-           .UseCustomMiddleware();
+           .UseEndpoints(_ => _.MapControllers());
     }
 }

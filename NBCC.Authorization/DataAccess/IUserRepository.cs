@@ -2,6 +2,6 @@
 {
     public interface IUserRepository
     {
-        Task Create(string username, string password);
+        Task Create(string username, string password, string email);
     }
 }

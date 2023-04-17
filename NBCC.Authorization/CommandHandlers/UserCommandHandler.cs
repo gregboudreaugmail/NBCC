@@ -9,6 +9,6 @@ namespace NBCC.Authorizaion.CommandHandlers
         IUserRepository AuthenticationRepository { get; }
         public UserCommandHandler(IUserRepository authenticationRepository) => AuthenticationRepository = authenticationRepository;
 
-        public async Task Handle(UserCommand command) => await AuthenticationRepository.Create(command.UserName, command.Password);
+        public async Task Handle(UserCommand command) => await AuthenticationRepository.Create(command.UserName, command.Password, command.Email);
     }
 }

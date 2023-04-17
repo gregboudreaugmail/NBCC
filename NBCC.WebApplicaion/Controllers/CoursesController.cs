@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
-using NBCC.Courses.Commands;
+﻿using NBCC.Courses.Commands;
 using System.ComponentModel.DataAnnotations;
 
 namespace NBCC.WebApplicaion.Controllers;
@@ -19,7 +18,11 @@ public sealed class CoursesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Post))]
-    public async Task<IActionResult> Post([Required][MaxLength(50)] string courseName)
+    public async Task<IActionResult> Post(
+        [Required]
+        [Display(Name = "Course Name")]
+        [MaxLength(50)] 
+            string courseName)
     {
         await Messages.Dispatch(new CoursesCommand(courseName));
         return Created(new Uri(Request.Path, UriKind.Relative), courseName);
