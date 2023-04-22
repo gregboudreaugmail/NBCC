@@ -1,4 +1,4 @@
-﻿namespace NBCC.Authorizaion.Commands
+﻿namespace NBCC.Authorization.Commands
 {
     public sealed record UserCommand
     {

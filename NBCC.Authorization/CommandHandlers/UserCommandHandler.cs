@@ -1,8 +1,8 @@
-﻿using NBCC.Authorizaion.Commands;
-using NBCC.Authorizaion.DataAccess;
+﻿using NBCC.Authorization.Commands;
+using NBCC.Authorization.DataAccess;
 using NBCC.Courses.Commands;
 
-namespace NBCC.Authorizaion.CommandHandlers
+namespace NBCC.Authorization.CommandHandlers
 {
     public sealed class UserCommandHandler : ICommandHandler<UserCommand>
     {

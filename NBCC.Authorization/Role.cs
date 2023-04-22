@@ -1,14 +1,14 @@
-﻿namespace NBCC.Authorizaion
+﻿namespace NBCC.Authorization
 {
     public sealed record Role
     {
-        public int RoleID { get; set; }
+        public int RoleId { get; set; }
         public string RoleName { get; } = string.Empty;
         public bool IsDefault { get; }
         public Role() { }
-        public Role(int roleID, string roleName, bool isDefault)
+        public Role(int roleId, string roleName, bool isDefault)
         {
-            RoleID = roleID;
+            RoleId = roleId;
             RoleName = roleName;
             IsDefault = isDefault;
         }

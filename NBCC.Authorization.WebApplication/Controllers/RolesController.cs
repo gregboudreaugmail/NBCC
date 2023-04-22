@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NBCC.Authorizaion;
-using NBCC.Authorizaion.Query;
+using NBCC.Authorization.Query;
 using NBCC.Authorization;
 using NBCC.Courses.Commands;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mime;
 
-namespace NBCC.WebApplicaion.Controllers
+namespace NBCC.WebApplication.Controllers
 {
     [Route("[controller]")]
     [ApiController]
@@ -27,6 +26,6 @@ namespace NBCC.WebApplicaion.Controllers
         public async Task<IActionResult> Get(
             [Display(Name = "Role ID")]
             [Range(0, 2147483647)]
-                int? roleID) => Ok(await Messages.Handle(new RolesQuery(roleID)));
+                int? roleId) => Ok(await Messages.Handle(new RolesQuery(roleId)));
     }
 }

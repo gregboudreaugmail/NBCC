@@ -1,4 +1,4 @@
-namespace NBCC.Courses.WebApplicaion;
+namespace NBCC.Courses.WebApplication;
 
 public class Program
 {

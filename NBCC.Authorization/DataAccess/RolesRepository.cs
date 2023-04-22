@@ -1,8 +1,8 @@
 ﻿using Dapper;
-using NBCC.Authorizaion.Properties;
 using System.Data.SqlClient;
+using NBCC.Authorization.Properties;
 
-namespace NBCC.Authorizaion.DataAccess
+namespace NBCC.Authorization.DataAccess
 {
     public sealed class RolesRepository : IRolesRepository
     {
@@ -11,10 +11,10 @@ namespace NBCC.Authorizaion.DataAccess
         public RolesRepository(AuthenticationConnection connection) =>
             Connection = connection ?? throw new ArgumentNullException(nameof(connection));
 
-        public async Task<IEnumerable<Role>> GetRoles(int? roleID)
+        public async Task<IEnumerable<Role>> GetRoles(int? roleId)
         {
             await using SqlConnection connection = new(Connection.Value);
-            return await connection.QueryAsync<Role>(SqlScript.SELECT_Roles, new { roleID });
+            return await connection.QueryAsync<Role>(SqlScript.SELECT_Roles, new { roleID = roleId });
         }
     }
 }

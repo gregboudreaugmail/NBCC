@@ -1,9 +1,4 @@
-﻿namespace NBCC.Authorizaion.Query
+﻿namespace NBCC.Authorization.Query
 {
-    public sealed record RolesQuery
-    {
-        public int? RoleID { get; }
-        public RolesQuery(int? roleID) => RoleID = roleID;
-
-    }
+    public sealed record RolesQuery(int? RoleId);
 }

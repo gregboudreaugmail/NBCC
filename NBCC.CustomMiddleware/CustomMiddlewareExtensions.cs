@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using NBCC.WebApplication.Messages;
 
-namespace NBCC.WebApplicaion;
+namespace NBCC.WebApplication;
 
 public static class CustomMiddlewareExtensions
 {

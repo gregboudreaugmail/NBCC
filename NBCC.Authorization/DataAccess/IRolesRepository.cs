@@ -1,8 +1,8 @@
-﻿namespace NBCC.Authorizaion.DataAccess
+﻿namespace NBCC.Authorization.DataAccess
 {
     public interface IRolesRepository
     {
-        Task<IEnumerable<Role>> GetRoles(int? roleID);
+        Task<IEnumerable<Role>> GetRoles(int? roleId);
     }
   
 }

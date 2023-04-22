@@ -1,15 +1,15 @@
-﻿namespace NBCC.Authorizaion
+﻿namespace NBCC.Authorization
 {
     public sealed record User
     {
-        public int UserID { get; }
+        public int UserId { get; }
         public string UserName { get; } = string.Empty;
-        public List<Role> Roles { get; } = new List<Role>();
+        public List<Role> Roles { get; } = new();
 
         public User() { }
-        public User(int userID, string userName, List<Role> roles)
+        public User(int userId, string userName, List<Role> roles)
         {
-            UserID = userID;
+            UserId = userId;
             UserName = userName;
             Roles = roles;
         }

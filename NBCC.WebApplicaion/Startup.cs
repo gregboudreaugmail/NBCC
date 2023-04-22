@@ -1,18 +1,17 @@
 ﻿using Microsoft.Extensions.DependencyInjection.Extensions;
-using NBCC.Authorizaion;
-using NBCC.Authorizaion.DataAccess;
+using NBCC.Authorization.DataAccess;
 using NBCC.Courses.CommandHandlers;
 using NBCC.Courses.Commands;
 using NBCC.Courses.DataAccess;
 using NBCC.Courses.WebApplication.Messages;
 using NBCC.Logs.DataAccess;
-using NBCC.WebApplicaion;
+using NBCC.WebApplication;
 
-namespace NBCC.Courses.WebApplicaion;
+namespace NBCC.Courses.WebApplication;
 
 public class Startup
 {
-    const string BASIC_AUTHENTICATION = "BasicAuthentication";
+    const string BasicAuthentication = "BasicAuthentication";
 
     IConfiguration Configuration { get; }
 
@@ -34,8 +33,8 @@ public class Startup
         services.TryAddSingleton(new LoggingConnection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
         services.AddTransient<IAuthenticatedUser, AuthenticatedUser>();
         services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
-        services.AddAuthentication(BASIC_AUTHENTICATION)
-                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(BASIC_AUTHENTICATION, null);
+        services.AddAuthentication(BasicAuthentication)
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(BasicAuthentication, null);
         services.AddSingleton(Configuration.GetRequiredSection(nameof(Message))
             .Get<Message>() ?? new Message());
     }

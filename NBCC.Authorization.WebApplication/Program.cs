@@ -1,6 +1,6 @@
-using NBCC.Authentication.WebApplicaion;
+using NBCC.Authentication.WebApplication;
 
-namespace NBCC.WebApplicaion;
+namespace NBCC.WebApplication;
 
 public class Program
 {

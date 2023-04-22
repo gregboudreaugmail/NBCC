@@ -1,7 +1,7 @@
 ﻿using NBCC.Courses.Commands;
 using System.ComponentModel.DataAnnotations;
 
-namespace NBCC.Courses.WebApplicaion.Controllers;
+namespace NBCC.Courses.WebApplication.Controllers;
 
 [Route("[controller]")]
 [ApiController]

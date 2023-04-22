@@ -1,9 +1,9 @@
 ﻿using Dapper;
-using NBCC.Authorizaion.Properties;
 using NBCC.Authorization;
 using System.Data.SqlClient;
+using NBCC.Authorization.Properties;
 
-namespace NBCC.Authorizaion.DataAccess
+namespace NBCC.Authorization.DataAccess
 {
     public sealed class UserRepository : IUserRepository
     {
@@ -15,7 +15,7 @@ namespace NBCC.Authorizaion.DataAccess
         public async Task Create(string userName, string password, string email)
         {
             await using SqlConnection connection = new(Connection.Value);
-            var credentials = Authentiate.GenerateSaltedHash(password);
+            var credentials = Authenticate.GenerateSaltedHash(password);
             await connection.ExecuteAsync(SqlScript.INSERT_User, new
             {
                 userName,

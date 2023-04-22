@@ -1,4 +1,4 @@
-﻿namespace NBCC.Authorizaion.DataAccess
+﻿namespace NBCC.Authorization.DataAccess
 {
     public interface IUserRepository
     {

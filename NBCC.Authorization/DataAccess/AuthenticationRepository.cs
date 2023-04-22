@@ -1,9 +1,8 @@
 ﻿using Dapper;
-using NBCC.Authorizaion.Properties;
-using NBCC.Authorization;
+using NBCC.Authorization.Properties;
 using System.Data.SqlClient;
 
-namespace NBCC.Authorizaion.DataAccess;
+namespace NBCC.Authorization.DataAccess;
 
 public sealed class AuthenticationRepository : IAuthenticationRepository
 {
@@ -19,16 +18,16 @@ public sealed class AuthenticationRepository : IAuthenticationRepository
         await connection.QueryAsync<User, Role, User>(SqlScript.SELECT_userByUserName,
             map: (user, role) =>
             {
-                if (!userDictionary.TryGetValue(user.UserID, out var u))
+                if (!userDictionary.TryGetValue(user.UserId, out var u))
                 {
                     u = user;
                     u.Roles.Add(role);
-                    userDictionary.Add(u.UserID, u);
+                    userDictionary.Add(u.UserId, u);
                 }
 
                 u.Roles.Add(role);
                 return u;
-            }, splitOn: "Roleid", param: new { userName });
+            }, splitOn: "RoleId", param: new { userName });
         return userDictionary.FirstOrDefault().Value;
     }
 
@@ -36,7 +35,7 @@ public sealed class AuthenticationRepository : IAuthenticationRepository
     {
         await using SqlConnection connection = new(Connection.Value);
         var persistedCredentials = await connection.QueryFirstOrDefaultAsync<HashSalt>(SqlScript.SELECT_passwordByUserName, new { userName });
-        return (persistedCredentials == null || Authentiate.VerifyPassword(password, persistedCredentials.Hash, persistedCredentials.Password));
+        return (persistedCredentials == null || Authenticate.VerifyPassword(password, persistedCredentials.Hash, persistedCredentials.Password));
 
     }
 }

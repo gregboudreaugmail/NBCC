@@ -1,6 +1,5 @@
-﻿using NBCC.Authorizaion.DataAccess;
+﻿using NBCC.Authorization.DataAccess;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace NBCC.Authorization;
 
@@ -21,8 +20,6 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
         try
         {
             var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
-            if (authHeader == null)
-                return await Task.FromResult(AuthenticateResult.Fail("Authentication failed"));
 
             var credentials = Encoding.UTF8.GetString(Convert.FromBase64String(authHeader.Parameter ?? string.Empty)).Split(':');
             userName = credentials.FirstOrDefault() ?? string.Empty;
@@ -42,8 +39,8 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
     {
         var user = await AuthenticationRepository.GetUser(userName) ?? throw new NullReferenceException();
         var claims = new Collection<Claim> {
-            new Claim(ClaimTypes.Name, user.UserName),
-            new Claim(ClaimTypes.Email, user.UserName),
+            new(ClaimTypes.Name, user.UserName),
+            new(ClaimTypes.Email, user.UserName),
         };
         foreach (var v in from p in typeof(Roles).GetFields()
                           let v = p.GetValue(null)?.ToString() ?? string.Empty

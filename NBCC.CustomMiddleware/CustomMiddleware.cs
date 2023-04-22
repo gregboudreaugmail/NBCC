@@ -2,7 +2,7 @@
 using NBCC.WebApplication.Messages;
 using System.Data.SqlClient;
 
-namespace NBCC.WebApplicaion;
+namespace NBCC.WebApplication;
 
 public class CustomMiddleware
 {
@@ -24,8 +24,8 @@ public class CustomMiddleware
         }
         catch (SqlException ex)
         {   
-            await SQLExceptionHandler.LogSQLExceptionAsync(ex);
-            await BadRequestResponse.HandleExceptionAsync(httpContext, ErrorMessage?.PersistanceError ?? string.Empty);
+            await SqlExceptionHandler.LogSqlExceptionAsync(ex);
+            await BadRequestResponse.HandleExceptionAsync(httpContext, ErrorMessage?.PersistenceError ?? string.Empty);
         }
         catch (Exception)
         {

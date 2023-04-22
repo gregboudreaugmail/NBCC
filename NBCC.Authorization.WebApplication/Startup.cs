@@ -1,23 +1,21 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using NBCC.Authorizaion;
-using NBCC.Authorizaion.CommandHandlers;
-using NBCC.Authorizaion.Commands;
-using NBCC.Authorizaion.DataAccess;
-using NBCC.Authorizaion.Query;
-using NBCC.Authorizaion.QueryHandlers;
 using NBCC.Authorization;
+using NBCC.Authorization.CommandHandlers;
+using NBCC.Authorization.Commands;
+using NBCC.Authorization.DataAccess;
+using NBCC.Authorization.Query;
+using NBCC.Authorization.QueryHandlers;
 using NBCC.Authorization.WebApplication.Messages;
 using NBCC.Courses.Commands;
-using NBCC.Logs;
 using NBCC.Logs.DataAccess;
-using NBCC.WebApplicaion;
+using NBCC.WebApplication;
 
-namespace NBCC.Authentication.WebApplicaion;
+namespace NBCC.Authentication.WebApplication;
 
 public class Startup
 {
-    const string BASIC_AUTHENTICATION = "BasicAuthentication";
+    const string BasicAuthentication = "BasicAuthentication";
     IConfiguration Configuration { get; }
 
     public Startup(IConfiguration configuration) => Configuration = configuration;
@@ -36,8 +34,8 @@ public class Startup
         services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
         services.AddTransient<ICommandHandler<UserCommand>, UserCommandHandler>();
         services.AddTransient<IQueryHandler<RolesQuery, IEnumerable<Role>>, RolesQueryHandler>();
-        services.AddAuthentication(BASIC_AUTHENTICATION)
-         .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(BASIC_AUTHENTICATION, null);
+        services.AddAuthentication(BasicAuthentication)
+         .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(BasicAuthentication, null);
         services.TryAddSingleton(new AuthenticationConnection(Configuration["ConnectionStrings:Connection"] ?? ""));
         services.TryAddSingleton(new LoggingConnection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
         services.AddSingleton(Configuration.GetRequiredSection(nameof(Message))

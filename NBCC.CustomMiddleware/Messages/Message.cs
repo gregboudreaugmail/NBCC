@@ -2,7 +2,7 @@
 {
     public interface IErrorMessage
     {
-        string PersistanceError { get; init; }
+        string PersistenceError { get; init; }
         string GeneralError { get; init; }
     }
 }

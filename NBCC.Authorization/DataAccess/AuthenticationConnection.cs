@@ -1,7 +1,3 @@
-﻿namespace NBCC.Authorizaion.DataAccess;
+﻿namespace NBCC.Authorization.DataAccess;
 
-public sealed record AuthenticationConnection
-{
-    public string Value { get; }
-    public AuthenticationConnection(string value) => Value = value;
-}
+public sealed record AuthenticationConnection(string Value);

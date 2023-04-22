@@ -1,17 +1,17 @@
 ﻿using System.Data.SqlClient;
 using System.Text;
 
-namespace NBCC.WebApplicaion;
+namespace NBCC.WebApplication;
 
-public static class SQLExceptionHandler
+public static class SqlExceptionHandler
 {
-    public static async Task LogSQLExceptionAsync(Exception ex)
+    public static async Task LogSqlExceptionAsync(Exception ex)
     {
         if (ex is SqlException exception)
         {
             StringBuilder errorMessages = new();
 
-            for (int i = 0; i < exception.Errors.Count; i++)
+            for (var i = 0; i < exception.Errors.Count; i++)
             {
                 errorMessages.Append("Index #" + i + "\n" +
                     "Message: " + exception.Errors[i].Message + "\n" +

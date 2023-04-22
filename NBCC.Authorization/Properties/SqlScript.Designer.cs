@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NBCC.Authorizaion.Properties {
+namespace NBCC.Authorization.Properties {
     using System;
     
     

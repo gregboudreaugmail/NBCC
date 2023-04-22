@@ -1,4 +1,4 @@
-﻿namespace NBCC.Authorizaion;
+﻿namespace NBCC.Authorization;
 
 public interface IAuthenticatedUser
 {
