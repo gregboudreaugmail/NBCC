@@ -2,7 +2,7 @@
 
 namespace NBCC.Courses.Commands;
 
-public class QueryDispatcher : IQueryDispatcher
+public sealed class QueryDispatcher : IQueryDispatcher
 {
     private readonly IServiceProvider _serviceProvider;
 

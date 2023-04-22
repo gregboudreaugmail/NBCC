@@ -2,7 +2,7 @@
 
 namespace NBCC.Authorizaion;
 
-public class AuthenticatedUser : IAuthenticatedUser
+public sealed class AuthenticatedUser : IAuthenticatedUser
 {
     IHttpContextAccessor HttpContextAccessor { get; }
     public string UserName => HttpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.Name) ?? string.Empty;

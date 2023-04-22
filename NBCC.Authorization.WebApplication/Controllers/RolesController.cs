@@ -6,13 +6,12 @@ using NBCC.Authorization;
 using NBCC.Courses.Commands;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mime;
-using System.Runtime.InteropServices;
 
 namespace NBCC.WebApplicaion.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class RolesController : ControllerBase
+    public sealed class RolesController : ControllerBase
     {
         IQueryHandler<RolesQuery, IEnumerable<Role>> Messages { get; }
         public RolesController(IQueryHandler<RolesQuery, IEnumerable<Role>> messages) => Messages = messages ?? throw new ArgumentNullException(nameof(messages));
@@ -27,7 +26,7 @@ namespace NBCC.WebApplicaion.Controllers
         [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Get))]
         public async Task<IActionResult> Get(
             [Display(Name = "Role ID")]
-            [Range(0,2147483647)]
+            [Range(0, 2147483647)]
                 int? roleID) => Ok(await Messages.Handle(new RolesQuery(roleID)));
     }
 }

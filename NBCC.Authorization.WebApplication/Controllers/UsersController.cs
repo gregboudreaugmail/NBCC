@@ -10,7 +10,7 @@ namespace NBCC.WebApplicaion.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public sealed class UsersController : ControllerBase
     {
         ICommandDispatcher Messages { get; }
         public UsersController(ICommandDispatcher messages) => Messages = messages ?? throw new ArgumentNullException(nameof(messages));

@@ -1,6 +1,6 @@
 ﻿namespace NBCC.Authorizaion
 {
-    public sealed class Role
+    public sealed record Role
     {
         public int RoleID { get; set; }
         public string RoleName { get; } = string.Empty;

@@ -2,7 +2,7 @@
 
 namespace NBCC.Courses.Commands;
 
-public class CommandResultDispatcher<TResult> : ICommandDispatcher<TResult>
+public sealed class CommandResultDispatcher<TResult> : ICommandDispatcher<TResult>
 {
     private readonly IServiceProvider _serviceProvider;
 

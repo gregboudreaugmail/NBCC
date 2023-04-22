@@ -36,7 +36,6 @@
 	<ItemGroup>
 		<Using Include="Microsoft.AspNetCore.Authentication" />
 		<Using Include="NBCC.Authorization" />
-		<Using Include="MediatR" />
 		<Using Include="System.Net.Mime" />
 		<Using Include="System" />
 		<Using Include="System.Collections.Generic" />

@@ -17,7 +17,7 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
 
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
-        string userName = string.Empty;
+        string? userName;
         try
         {
             var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
@@ -56,9 +56,4 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
         var ticket = new AuthenticationTicket(principal, Scheme.Name);
         return ticket;
     }
-}
-public static class Roles
-{
-    public const string Administrator = nameof(Administrator);
-    public const string Instructor = nameof(Instructor);
 }
