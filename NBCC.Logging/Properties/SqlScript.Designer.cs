@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NBCC.Courses.Properties {
+namespace NBCC.Logging.Properties {
     using System;
     
     
@@ -22,7 +22,7 @@ namespace NBCC.Courses.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class SqlScript {
+    internal class SqlScript {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +36,10 @@ namespace NBCC.Courses.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NBCC.Courses.Properties.SqlScript", typeof(SqlScript).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NBCC.Logging.Properties.SqlScript", typeof(SqlScript).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,24 +51,12 @@ namespace NBCC.Courses.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to INSERT INTO [College].[Courses]
-        ///           ([CourseName])
-        ///     VALUES
-        ///           (@courseName).
-        /// </summary>
-        public static string INSERT_Courses {
-            get {
-                return ResourceManager.GetString("INSERT_Courses", resourceCulture);
             }
         }
     }

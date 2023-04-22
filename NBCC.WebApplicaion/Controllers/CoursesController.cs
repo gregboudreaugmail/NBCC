@@ -1,7 +1,7 @@
 ﻿using NBCC.Courses.Commands;
 using System.ComponentModel.DataAnnotations;
 
-namespace NBCC.WebApplicaion.Controllers;
+namespace NBCC.Courses.WebApplicaion.Controllers;
 
 [Route("[controller]")]
 [ApiController]
@@ -11,6 +11,7 @@ public sealed class CoursesController : ControllerBase
     public CoursesController(ICommandDispatcher messages) => Messages = messages ?? throw new ArgumentNullException(nameof(messages));
 
     [HttpPost]
+    [Authorize(Roles = $"{Roles.Administrator},{Roles.Instructor}")]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]

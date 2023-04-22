@@ -1,6 +1,10 @@
-﻿using NBCC.Authorizaion.Commands;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using NBCC.Authorizaion.Commands;
+using NBCC.Authorization;
 using NBCC.Courses.Commands;
 using System.ComponentModel.DataAnnotations;
+using System.Net.Mime;
 
 namespace NBCC.WebApplicaion.Controllers
 {

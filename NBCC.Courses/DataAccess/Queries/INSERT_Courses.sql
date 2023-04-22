@@ -1,1 +1,4 @@
-﻿insert into courses values (@courseName)
+﻿INSERT INTO [College].[Courses]
+           ([CourseName])
+     VALUES
+           (@courseName)

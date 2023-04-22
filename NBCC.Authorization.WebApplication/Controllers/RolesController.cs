@@ -1,7 +1,11 @@
-﻿using NBCC.Authorizaion;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using NBCC.Authorizaion;
 using NBCC.Authorizaion.Query;
+using NBCC.Authorization;
 using NBCC.Courses.Commands;
 using System.ComponentModel.DataAnnotations;
+using System.Net.Mime;
 using System.Runtime.InteropServices;
 
 namespace NBCC.WebApplicaion.Controllers
@@ -14,7 +18,7 @@ namespace NBCC.WebApplicaion.Controllers
         public RolesController(IQueryHandler<RolesQuery, IEnumerable<Role>> messages) => Messages = messages ?? throw new ArgumentNullException(nameof(messages));
 
         [HttpGet]
-        [Authorize(Roles = $"{Roles.Administrator},{Roles.Instructor}")]
+        [Authorize(Roles = Roles.Administrator)]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -7,7 +7,6 @@ namespace NBCC.Courses.DataAccess;
 public sealed class CourseRepository : ICourseRepository
 {
     Connection Connection { get; }
-
     public CourseRepository(Connection connection) =>
         Connection = connection ?? throw new ArgumentNullException(nameof(connection));
 
