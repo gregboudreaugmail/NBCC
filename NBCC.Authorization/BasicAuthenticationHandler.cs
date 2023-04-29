@@ -5,15 +5,20 @@ namespace NBCC.Authorization;
 
 public sealed class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
+    private ILoggerFactory LoggerFactory { get; }
     IAuthenticationRepository AuthenticationRepository { get; }
 
     public BasicAuthenticationHandler(IAuthenticationRepository authenticationRepository,
         IOptionsMonitor<AuthenticationSchemeOptions> options,
-        ILoggerFactory logger,
+        ILoggerFactory loggerFactory,
         UrlEncoder encoder,
         ISystemClock clock)
-        : base(options, logger, encoder, clock) => AuthenticationRepository = authenticationRepository;
-
+        : base(options, loggerFactory, encoder, clock)
+    {
+        LoggerFactory = loggerFactory;
+        AuthenticationRepository = authenticationRepository;
+    }
+    
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
         string? userName;
@@ -24,8 +29,10 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
             var credentials = Encoding.UTF8.GetString(Convert.FromBase64String(authHeader.Parameter ?? string.Empty)).Split(':');
             userName = credentials.FirstOrDefault() ?? string.Empty;
             var password = credentials.LastOrDefault() ?? string.Empty;
+            
+            var authenticated = await AuthenticationRepository.AuthenticateUser(userName, password);
 
-            if (!await AuthenticationRepository.AuthenticateUser(userName, password)) throw new ArgumentException("Invalid credentials");
+            if (!authenticated) throw new ArgumentException("Invalid credentials");
         }
         catch (Exception ex)
         {
@@ -39,8 +46,9 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
     {
         var user = await AuthenticationRepository.GetUser(userName) ?? throw new NullReferenceException();
         var claims = new Collection<Claim> {
+            new(ClaimTypes.NameIdentifier, user.UserId.ToString()),
             new(ClaimTypes.Name, user.UserName),
-            new(ClaimTypes.Email, user.UserName),
+            new(ClaimTypes.Email, user.Email)
         };
         foreach (var v in from p in typeof(Roles).GetFields()
                           let v = p.GetValue(null)?.ToString() ?? string.Empty

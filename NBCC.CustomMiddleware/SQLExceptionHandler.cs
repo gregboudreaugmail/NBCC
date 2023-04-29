@@ -20,7 +20,7 @@ public static class SqlExceptionHandler
                     "Source: " + exception.Errors[i].Source + "\n" +
                     "Procedure: " + exception.Errors[i].Procedure + "\n");
             }
-            //await logging.Log(errorMessages.ToString());
+            //await logging.Interaction(errorMessages.ToString());
         }
     }
 }

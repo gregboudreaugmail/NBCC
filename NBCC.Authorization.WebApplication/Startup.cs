@@ -8,7 +8,7 @@ using NBCC.Authorization.Query;
 using NBCC.Authorization.QueryHandlers;
 using NBCC.Authorization.WebApplication.Messages;
 using NBCC.Courses.Commands;
-using NBCC.Logs.DataAccess;
+using NBCC.Logging.DataAccess;
 using NBCC.WebApplication;
 
 namespace NBCC.Authentication.WebApplication;
@@ -30,14 +30,14 @@ public class Startup
         services.TryAddSingleton<ICommandDispatcher, CommandDispatcher>();
         services.AddTransient<IUserRepository, UserRepository>();
         services.AddTransient<IRolesRepository, RolesRepository>();
-        services.AddTransient<IAuthenticatedUser, AuthenticatedUser>();
+        services.AddTransient<IUser, User>();
         services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
         services.AddTransient<ICommandHandler<UserCommand>, UserCommandHandler>();
         services.AddTransient<IQueryHandler<RolesQuery, IEnumerable<Role>>, RolesQueryHandler>();
         services.AddAuthentication(BasicAuthentication)
          .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(BasicAuthentication, null);
         services.TryAddSingleton(new AuthenticationConnection(Configuration["ConnectionStrings:Connection"] ?? ""));
-        services.TryAddSingleton(new LoggingConnection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
+        services.TryAddSingleton(new Connection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
         services.AddSingleton(Configuration.GetRequiredSection(nameof(Message))
                 .Get<Message>() ?? new Message());
     }

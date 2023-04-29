@@ -4,8 +4,10 @@ using NBCC.Courses.CommandHandlers;
 using NBCC.Courses.Commands;
 using NBCC.Courses.DataAccess;
 using NBCC.Courses.WebApplication.Messages;
-using NBCC.Logs.DataAccess;
+using NBCC.Logging;
+using NBCC.Logging.DataAccess;
 using NBCC.WebApplication;
+using Connection = NBCC.Logging.DataAccess.Connection;
 
 namespace NBCC.Courses.WebApplication;
 
@@ -28,25 +30,28 @@ public class Startup
         services.TryAddSingleton<ICommandDispatcher, CommandDispatcher>();
         services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddTransient<ICommandHandler<CoursesCommand>, CoursesCommandHandler>();
-        services.TryAddSingleton(new Connection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
+        services.TryAddSingleton(new DataAccess.Connection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
         services.TryAddSingleton(new AuthenticationConnection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
-        services.TryAddSingleton(new LoggingConnection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
-        services.AddTransient<IAuthenticatedUser, AuthenticatedUser>();
+        services.TryAddSingleton(new Connection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
+        services.AddTransient<IUser, User>();
         services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
         services.AddAuthentication(BasicAuthentication)
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(BasicAuthentication, null);
-        services.AddSingleton(Configuration.GetRequiredSection(nameof(Message))
+        services.TryAddSingleton(Configuration.GetRequiredSection(nameof(Message))
             .Get<Message>() ?? new Message());
+        services.AddTransient<IInteractionLog, InteractionLog>();
+        services.AddSingleton<ILoggerProvider, CustomLoggerProvider>();
+        services.AddLogging();
     }
 
     public void Configure(IApplicationBuilder app, Message message)
     {
         app.UseCustomMiddleware(message)
-           .UseSwagger()
-           .UseSwaggerUI()
-           .UseRouting()
-           .UseAuthentication()
-           .UseAuthorization()
-           .UseEndpoints(_ => _.MapControllers());
+            .UseSwagger()
+            .UseSwaggerUI()
+            .UseRouting()
+            .UseAuthentication()
+            .UseAuthorization()
+            .UseEndpoints(_ => _.MapControllers());
     }
 }
