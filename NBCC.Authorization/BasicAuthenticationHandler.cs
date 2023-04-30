@@ -1,5 +1,6 @@
 ﻿using NBCC.Authorization.DataAccess;
 using System.Collections.ObjectModel;
+using NBCC.Logging.Models;
 
 namespace NBCC.Authorization;
 
@@ -18,7 +19,7 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
         LoggerFactory = loggerFactory;
         AuthenticationRepository = authenticationRepository;
     }
-    
+
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
         string? userName;
@@ -29,9 +30,8 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
             var credentials = Encoding.UTF8.GetString(Convert.FromBase64String(authHeader.Parameter ?? string.Empty)).Split(':');
             userName = credentials.FirstOrDefault() ?? string.Empty;
             var password = credentials.LastOrDefault() ?? string.Empty;
-            
-            var authenticated = await AuthenticationRepository.AuthenticateUser(userName, password);
 
+            var authenticated = await AuthenticationRepository.AuthenticateUser(userName, password);
             if (!authenticated) throw new ArgumentException("Invalid credentials");
         }
         catch (Exception ex)
@@ -45,6 +45,8 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
     private async Task<AuthenticationTicket> GetUser(string userName)
     {
         var user = await AuthenticationRepository.GetUser(userName) ?? throw new NullReferenceException();
+        LogAuthentication(user);
+
         var claims = new Collection<Claim> {
             new(ClaimTypes.NameIdentifier, user.UserId.ToString()),
             new(ClaimTypes.Name, user.UserName),
@@ -60,5 +62,19 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
         var principal = new ClaimsPrincipal(identity);
         var ticket = new AuthenticationTicket(principal, Scheme.Name);
         return ticket;
+    }
+
+    private void LogAuthentication(User user)
+    {
+        try
+        {
+            LoggerFactory.CreateLogger(nameof(BasicAuthenticationHandler))
+                        .LogInformation("{user}", new Authentication(user.UserId));
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+
     }
 }

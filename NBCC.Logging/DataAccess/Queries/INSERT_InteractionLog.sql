@@ -1,2 +1,0 @@
-INSERT INTO Logging.Interactions VALUES (@UserId)
-SELECT SCOPE_IDENTITY()

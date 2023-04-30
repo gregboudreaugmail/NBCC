@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace NBCC.Logging;
+namespace NBCC.Logging.Models;
 
 public sealed class Interaction
 {

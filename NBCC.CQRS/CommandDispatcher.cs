@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using NBCC.Logging;
+using NBCC.Logging.Models;
 using static System.Reflection.Assembly;
 using static System.Text.Json.JsonSerializer;
 

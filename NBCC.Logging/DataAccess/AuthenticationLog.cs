@@ -1,30 +1,19 @@
-﻿//using Dapper;
-//using NBCC.Logging.Properties;
-//using System.Data.SqlClient;
-//using NBCC.Authorization;
+﻿using Dapper;
+using NBCC.Logging.Models;
+using NBCC.Logging.Properties;
+using System.Data.SqlClient;
 
 namespace NBCC.Logging.DataAccess
 {
     public sealed class AuthenticationLog : IAuthenticationLog
     {
-        //Connection Connection { get; }
-        //IUser User { get; }
+        Connection Connection { get; }
+        public AuthenticationLog(Connection connection) => Connection = connection ?? throw new ArgumentNullException(nameof(connection));
 
-        //public AuthenticationLog(Connection connection, IUser user)
-        //{
-        //    Connection = connection ?? throw new ArgumentNullException(nameof(connection));
-        //    User = user ?? throw new ArgumentNullException(nameof(user));
-        //}
-
-        //public async Task<int> Interaction()
-        //{
-        //    await using SqlConnection connection = new(Connection.Value);
-        //    return await connection.QuerySingleAsync<int>(SqlScript.INSERT_InteractionLog, 
-        //        new { User.UserId });
-        //}
-        public Task<int> Log()
+        public async Task<int> Log(Authentication authentication)
         {
-            throw new NotImplementedException();
+            await using SqlConnection connection = new(Connection.Value);
+            return await connection.QuerySingleAsync<int>(SqlScript.INSERT_AuthenticationLog, authentication);
         }
     }
 }

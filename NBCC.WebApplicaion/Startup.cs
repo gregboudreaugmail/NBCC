@@ -40,6 +40,7 @@ public class Startup
         services.TryAddSingleton(Configuration.GetRequiredSection(nameof(Message))
             .Get<Message>() ?? new Message());
         services.AddTransient<IInteractionLog, InteractionLog>();
+        services.AddTransient<IAuthenticationLog, AuthenticationLog>();
         services.AddSingleton<ILoggerProvider, CustomLoggerProvider>();
         services.AddLogging();
     }

@@ -61,8 +61,22 @@ namespace NBCC.Logging.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to INSERT INTO [Logging].[InteractionsDetails]
-        ///           ([InteractionId]
+        ///   Looks up a localized string similar to INSERT INTO [Logging].[Authentication]
+        ///           ([UserId])
+        ///     VALUES
+        ///           (@UserId)
+        ///
+        ///SELECT SCOPE_IDENTITY().
+        /// </summary>
+        internal static string INSERT_AuthenticationLog {
+            get {
+                return ResourceManager.GetString("INSERT_AuthenticationLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO [Logging].[Interactions]
+        ///           ([AuthenticationId]
         ///           ,[AssemblyName]
         ///           ,[Command]
         ///           ,[Parameters])
@@ -76,19 +90,9 @@ namespace NBCC.Logging.Properties {
         ///
         ///.
         /// </summary>
-        internal static string INSERT_InteractionDetails {
+        internal static string INSERT_Interaction {
             get {
-                return ResourceManager.GetString("INSERT_InteractionDetails", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to INSERT INTO Logging.Interactions VALUES (@UserId)
-        ///SELECT SCOPE_IDENTITY().
-        /// </summary>
-        internal static string INSERT_InteractionLog {
-            get {
-                return ResourceManager.GetString("INSERT_InteractionLog", resourceCulture);
+                return ResourceManager.GetString("INSERT_Interaction", resourceCulture);
             }
         }
     }

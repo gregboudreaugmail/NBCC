@@ -1,6 +1,8 @@
-﻿namespace NBCC.Logging.DataAccess;
+﻿using NBCC.Logging.Models;
 
-public interface IAuthenticationLog
+namespace NBCC.Logging.DataAccess;
+
+public interface IAuthenticationLog 
 {
-    Task<int> Log();
+    Task<int> Log(Authentication authentication);
 }
