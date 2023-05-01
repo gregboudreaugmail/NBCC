@@ -18,15 +18,22 @@ namespace NBCC.Logging.DataAccess
 
         public async Task Log(Interaction interaction)
         {
-            await using SqlConnection connection = new(Connection.Value);
-            await connection.ExecuteAsync(SqlScript.INSERT_Interaction, 
-                new
-                {
-                    AuthenticationSession.AuthenticationId,
-                    interaction.AssemblyName,
-                    interaction.Command,
-                    interaction.Parameters
-                });
+            try
+            {
+                await using SqlConnection connection = new(Connection.Value);
+                await connection.ExecuteAsync(SqlScript.INSERT_Interaction,
+                    new
+                    {
+                        AuthenticationSession.AuthenticationId,
+                        interaction.AssemblyName,
+                        interaction.Command,
+                        interaction.Parameters
+                    });
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }

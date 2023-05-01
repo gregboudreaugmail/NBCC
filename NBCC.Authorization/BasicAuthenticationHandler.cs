@@ -58,7 +58,8 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
     {
         var user = await AuthenticationRepository.GetUser(userName) ?? throw new NullReferenceException();
 
-        var authenticatedId = await LogAuthentication(user);
+        var authenticatedId = await AuthenticationLog.Log(user.UserId);
+        AuthenticationSession.AssignAuthentication(authenticatedId, user.UserId);
 
         var claims = new Collection<Claim>
         {
@@ -77,20 +78,5 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
         var principal = new ClaimsPrincipal(identity);
         var ticket = new AuthenticationTicket(principal, Scheme.Name);
         return ticket;
-    }
-
-    private async Task<int> LogAuthentication(IUser user)
-    {
-        try
-        {
-            var authenticatedId = await AuthenticationLog.Log(user.UserId);
-            AuthenticationSession.AssignAuthentication(authenticatedId, user.UserId);
-            return authenticatedId;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            return 0;
-        }
     }
 }

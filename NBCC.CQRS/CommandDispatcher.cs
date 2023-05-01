@@ -26,16 +26,9 @@ public sealed class CommandDispatcher : ICommandDispatcher
 
     private void LogInteraction<TCommand>(TCommand command, ICommandHandler<TCommand> handler)
     {
-        try
-        {
-            var assembly = GetEntryAssembly()?.ManifestModule.Name ?? string.Empty;
-            var commandParameters = Serialize(command);
-            var commandName = handler.GetType().FullName ?? string.Empty;
-            Logger.LogInformation("{log}", new Interaction(assembly, commandName, commandParameters));
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
+        var assembly = GetEntryAssembly()?.ManifestModule.Name ?? string.Empty;
+        var commandParameters = Serialize(command);
+        var commandName = handler.GetType().FullName ?? string.Empty;
+        Logger.LogInformation("{log}", new Interaction(assembly, commandName, commandParameters));
     }
 }

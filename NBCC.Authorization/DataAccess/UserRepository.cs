@@ -1,7 +1,6 @@
 ﻿using Dapper;
-using NBCC.Authorization;
-using System.Data.SqlClient;
 using NBCC.Authorization.Properties;
+using System.Data.SqlClient;
 
 namespace NBCC.Authorization.DataAccess
 {
