@@ -7,16 +7,11 @@ namespace NBCC.Logging;
 public class CustomLoggerProvider : ILoggerProvider
 {
     IInteractionLog InteractionLog { get; }
-    IAuthenticationLog AuthenticationLog { get; }
     private ConcurrentDictionary<string, CustomLogger> Loggers { get; } = new();
 
-    public CustomLoggerProvider(IInteractionLog interactionLog , IAuthenticationLog authenticationLog)
-    {
-        InteractionLog = interactionLog;
-        AuthenticationLog = authenticationLog;
-    }
+    public CustomLoggerProvider(IInteractionLog interactionLog) => InteractionLog = interactionLog;
 
-    public ILogger CreateLogger(string categoryName) => Loggers.GetOrAdd(categoryName, new CustomLogger(InteractionLog, AuthenticationLog));
+    public ILogger CreateLogger(string categoryName) => Loggers.GetOrAdd(categoryName, new CustomLogger(InteractionLog));
 
     public void Dispose()
     {

@@ -81,7 +81,7 @@ namespace NBCC.Logging.Properties {
         ///           ,[Command]
         ///           ,[Parameters])
         ///     VALUES
-        ///           (@InteractionId,
+        ///           (@AuthenticationId,
         ///           @AssemblyName,
         ///           @Command,
         ///           @Parameters)

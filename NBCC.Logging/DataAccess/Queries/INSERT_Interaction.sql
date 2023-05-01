@@ -4,7 +4,7 @@ INSERT INTO [Logging].[Interactions]
            ,[Command]
            ,[Parameters])
      VALUES
-           (@InteractionId,
+           (@AuthenticationId,
            @AssemblyName,
            @Command,
            @Parameters)

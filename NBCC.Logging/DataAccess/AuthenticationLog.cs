@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using NBCC.Logging.Models;
 using NBCC.Logging.Properties;
 using System.Data.SqlClient;
 
@@ -10,10 +9,10 @@ namespace NBCC.Logging.DataAccess
         Connection Connection { get; }
         public AuthenticationLog(Connection connection) => Connection = connection ?? throw new ArgumentNullException(nameof(connection));
 
-        public async Task<int> Log(Authentication authentication)
+        public async Task<int> Log(int userId)
         {
             await using SqlConnection connection = new(Connection.Value);
-            return await connection.QuerySingleAsync<int>(SqlScript.INSERT_AuthenticationLog, authentication);
+            return await connection.QuerySingleAsync<int>(SqlScript.INSERT_AuthenticationLog, new { userId });
         }
     }
 }

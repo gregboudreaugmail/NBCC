@@ -8,13 +8,25 @@ namespace NBCC.Logging.DataAccess
     public sealed class InteractionLog : IInteractionLog
     {
         Connection Connection { get; }
-        public InteractionLog(Connection connection) =>
+        IAuthenticationSession AuthenticationSession { get; }
+
+        public InteractionLog(Connection connection, IAuthenticationSession authenticationSession)
+        {
             Connection = connection ?? throw new ArgumentNullException(nameof(connection));
-        
-        public async Task Log(Interaction? interaction)
+            AuthenticationSession = authenticationSession ?? throw new ArgumentNullException(nameof(authenticationSession));
+        }
+
+        public async Task Log(Interaction interaction)
         {
             await using SqlConnection connection = new(Connection.Value);
-            await connection.ExecuteAsync(SqlScript.INSERT_Interaction, interaction);
+            await connection.ExecuteAsync(SqlScript.INSERT_Interaction, 
+                new
+                {
+                    AuthenticationSession.AuthenticationId,
+                    interaction.AssemblyName,
+                    interaction.Command,
+                    interaction.Parameters
+                });
         }
     }
 }

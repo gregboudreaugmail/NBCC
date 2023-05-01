@@ -31,7 +31,7 @@ public sealed class CommandDispatcher : ICommandDispatcher
             var assembly = GetEntryAssembly()?.ManifestModule.Name ?? string.Empty;
             var commandParameters = Serialize(command);
             var commandName = handler.GetType().FullName ?? string.Empty;
-            Logger.LogInformation("{log}", new Interaction(0, assembly, commandName, commandParameters));
+            Logger.LogInformation("{log}", new Interaction(assembly, commandName, commandParameters));
         }
         catch (Exception e)
         {
