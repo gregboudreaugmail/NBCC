@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using System.Text;
 
 namespace NBCC.Logging.Models;
 
@@ -8,43 +6,13 @@ public sealed class AuthenticationSession : IAuthenticationSession
 {
     IHttpContextAccessor HttpContextAccessor { get; }
 
-    public AuthenticationSession(IHttpContextAccessor httpContextAccessor) => HttpContextAccessor = httpContextAccessor;
-    public int UserId
-    {
-        get
-        {
-            HttpContextAccessor.HttpContext.Session
-                .TryGetValue(CachedItems.UserId, out var authenticationId);
-            return Deserialize<int>(authenticationId);
-        }
-    }
-
-    public int AuthenticationId
-    {
-        get
-        {
-            HttpContextAccessor.HttpContext.Session
-                .TryGetValue(CachedItems.AuthenticatedId, out var authenticationId);
-            return Deserialize<int>(authenticationId);
-        }
-    }
+    public AuthenticationSession(IHttpContextAccessor httpContextAccessorAccessor) => HttpContextAccessor = httpContextAccessorAccessor;
+    public int UserId => int.Parse(HttpContextAccessor.HttpContext.Request.Headers[CachedItems.UserId].FirstOrDefault() ?? "0");
+    public int AuthenticationId =>  int.Parse(HttpContextAccessor.HttpContext.Request.Headers[CachedItems.AuthenticatedId].FirstOrDefault()  ?? "0");
 
     public void AssignAuthentication(int authenticationId, int userId)
     {
-        HttpContextAccessor.HttpContext.Session.Set(CachedItems.AuthenticatedId, ObjectToBytes(authenticationId));
-        HttpContextAccessor.HttpContext.Session.Set(CachedItems.UserId, ObjectToBytes(userId));
-    }
-
-    static T Deserialize<T>(byte[] param)
-    {
-        var result = Encoding.UTF8.GetString(param);
-        return JsonConvert.DeserializeObject<T>(result);
-    }
-
-    static byte[] ObjectToBytes(object obj)
-    {
-        var json = JsonConvert.SerializeObject(obj);
-        var serializedResult = Encoding.UTF8.GetBytes(json);
-        return serializedResult;
+        HttpContextAccessor.HttpContext.Request.Headers.Add(CachedItems.UserId, userId.ToString());
+        HttpContextAccessor.HttpContext.Request.Headers.Add(CachedItems.AuthenticatedId, authenticationId.ToString());
     }
 }

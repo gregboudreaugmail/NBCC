@@ -65,8 +65,7 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
         {
             new(ClaimTypes.NameIdentifier, user.ToString()),
             new(ClaimTypes.Name, user.UserName),
-            new(ClaimTypes.Email, user.Email),
-            new(CustomClaimTypes.AuthenticationLogId, authenticatedId.ToString()),
+            new(ClaimTypes.Email, user.Email)
         };
         foreach (var roleName in from fieldsInRoles in typeof(Roles).GetFields()
                  let fieldName = fieldsInRoles.GetValue(null)?.ToString() ?? string.Empty

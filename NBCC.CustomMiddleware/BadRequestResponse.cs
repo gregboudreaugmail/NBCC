@@ -14,6 +14,6 @@ public static class BadRequestResponse
         response.ContentType = "application/text";
         response.StatusCode = (int)HttpStatusCode.BadRequest;
         var referenceMessage = messageId != null ? $"Reference Number: {messageId}" : string.Empty;
-        await response.WriteAsync($"{errorMessage.NullIfWhiteSpace() ?? GeneralError}. {referenceMessage}");
+        await response.WriteAsync($"{errorMessage.NullIfWhiteSpace() ?? GeneralError} {referenceMessage}");
     }
 }
