@@ -6,9 +6,9 @@ namespace NBCC.Authorization.DataAccess;
 
 public sealed class AuthenticationRepository : IAuthenticationRepository
 {
-    AuthenticationConnection Connection { get; }
+    Connection Connection { get; }
 
-    public AuthenticationRepository(AuthenticationConnection connection) =>
+    public AuthenticationRepository(Connection connection) =>
         Connection = connection ?? throw new ArgumentNullException(nameof(connection));
 
     public async Task<User?> GetUser(string userName)

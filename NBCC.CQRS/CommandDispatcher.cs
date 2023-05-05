@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using NBCC.Logging.Models;
 using static System.Reflection.Assembly;
 using static System.Text.Json.JsonSerializer;
@@ -9,9 +8,9 @@ namespace NBCC.Courses.Commands;
 public sealed class CommandDispatcher : ICommandDispatcher
 {
     IServiceProvider ServiceProvider { get; }
-    ILogger<CommandDispatcher> Logger { get; }
+    ILoggerAsync Logger { get; }
 
-    public CommandDispatcher(IServiceProvider serviceProvider, ILogger<CommandDispatcher> logger)
+    public CommandDispatcher(IServiceProvider serviceProvider, ILoggerAsync logger)
     {
         ServiceProvider = serviceProvider;
         Logger = logger;
@@ -29,6 +28,6 @@ public sealed class CommandDispatcher : ICommandDispatcher
         var assembly = GetEntryAssembly()?.ManifestModule.Name ?? string.Empty;
         var commandParameters = Serialize(command);
         var commandName = handler.GetType().FullName ?? string.Empty;
-        Logger.LogInformation("{log}", new Interaction(assembly, commandName, commandParameters));
+        Logger.Log(new Interaction(assembly, commandName, commandParameters));
     }
 }

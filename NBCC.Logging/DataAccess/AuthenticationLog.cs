@@ -17,6 +17,7 @@ namespace NBCC.Logging.DataAccess
             {
                 await using SqlConnection connection = new(Connection.Value);
                 return await connection.QuerySingleAsync<int>(SqlScript.INSERT_AuthenticationLog, new { userId });
+
             }
             catch (Exception e)
             {

@@ -121,7 +121,10 @@
   <data name="INSERT_AuthenticationLog" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\DataAccess\Queries\INSERT_AuthenticationLog.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="INSERT_Interaction" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\DataAccess\Queries\INSERT_Interaction.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  <data name="INSERT_ExceptionLog" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\DataAccess\Queries\INSERT_ExceptionLog.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="INSERT_InteractionLog" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\DataAccess\Queries\INSERT_InteractionLog.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
 </root>

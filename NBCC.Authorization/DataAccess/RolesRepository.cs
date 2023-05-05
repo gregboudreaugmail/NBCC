@@ -6,9 +6,9 @@ namespace NBCC.Authorization.DataAccess
 {
     public sealed class RolesRepository : IRolesRepository
     {
-        AuthenticationConnection Connection { get; }
+        Connection Connection { get; }
 
-        public RolesRepository(AuthenticationConnection connection) =>
+        public RolesRepository(Connection connection) =>
             Connection = connection ?? throw new ArgumentNullException(nameof(connection));
 
         public async Task<IEnumerable<Role>> GetRoles(int? roleId)

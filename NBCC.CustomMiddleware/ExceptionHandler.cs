@@ -1,9 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
-
-namespace NBCC.WebApplication;
+﻿namespace NBCC.WebApplication;
 
 public static class ExceptionHandler
 {
-    public static void LogException(Exception ex, ILogger<CustomMiddleware> logger) => 
-        logger.LogInformation("{error}", ex.ToString());
+    public static async Task<int?> LogException(Exception ex, ILoggerAsync logger) => 
+        await logger.Log(ex);
 }

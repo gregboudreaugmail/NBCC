@@ -10,6 +10,7 @@ using NBCC.Authorization.WebApplication.Messages;
 using NBCC.Courses.Commands;
 using NBCC.Logging.DataAccess;
 using NBCC.WebApplication;
+using Connection = NBCC.Authorization.DataAccess.Connection;
 
 namespace NBCC.Authentication.WebApplication;
 
@@ -36,8 +37,8 @@ public class Startup
         services.AddTransient<IQueryHandler<RolesQuery, IEnumerable<Role>>, RolesQueryHandler>();
         services.AddAuthentication(BasicAuthentication)
          .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(BasicAuthentication, null);
-        services.TryAddSingleton(new AuthenticationConnection(Configuration["ConnectionStrings:Connection"] ?? ""));
-        services.TryAddSingleton(new Connection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
+        services.TryAddSingleton(new Connection(Configuration["ConnectionStrings:Connection"] ?? ""));
+        services.TryAddSingleton(new Logging.DataAccess.Connection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
         services.AddSingleton(Configuration.GetRequiredSection(nameof(Message))
                 .Get<Message>() ?? new Message());
     }

@@ -4,12 +4,13 @@ using System.Text;
 
 namespace NBCC.Logging.Models;
 
-public sealed class AuthenticationSessionSession : IAuthenticationSession
+public sealed class AuthenticationSession : IAuthenticationSession
 {
     IHttpContextAccessor HttpContextAccessor { get; }
 
-    public AuthenticationSessionSession(IHttpContextAccessor httpContextAccessor) => HttpContextAccessor = httpContextAccessor;
-    public int UserId {
+    public AuthenticationSession(IHttpContextAccessor httpContextAccessor) => HttpContextAccessor = httpContextAccessor;
+    public int UserId
+    {
         get
         {
             HttpContextAccessor.HttpContext.Session

@@ -37,7 +37,7 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
         }
         catch (Exception ex)
         {
-            return await Task.FromResult(AuthenticateResult.Fail($"AuthenticationSessionSession failed: {ex.Message}"));
+            return await Task.FromResult(AuthenticateResult.Fail($"AuthenticationSession failed: {ex.Message}"));
         }
 
         return await Task.FromResult(AuthenticateResult.Success(await GetTicket(userName)));
