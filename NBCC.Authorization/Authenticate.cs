@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography;
-
-namespace NBCC.Authorization;
+﻿namespace NBCC.Authorization;
 public sealed class Authenticate
 {
     const int HashSize = 512;
@@ -10,8 +8,8 @@ public sealed class Authenticate
     public static HashSalt GenerateSaltedHash(string password)
     {
         var saltBytes = new byte[HashSize];
-        using (var generator = RandomNumberGenerator.Create())
-            generator.GetBytes(saltBytes);
+        using var generator = RandomNumberGenerator.Create();
+        generator.GetBytes(saltBytes);
 
         Rfc2898DeriveBytes pbkdf2 = new(password, saltBytes, Iterations, HashAlgorithmName.SHA512);
         var hashPassword = pbkdf2.GetBytes(SaltSize);

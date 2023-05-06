@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace NBCC.Logging.Models;
+﻿namespace NBCC.Logging.Models;
 
 public sealed class AuthenticationSession : IAuthenticationSession
 {

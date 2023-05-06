@@ -1,10 +1,7 @@
-﻿using Dapper;
-using NBCC.Authorization.Properties;
-using System.Data.SqlClient;
+﻿using NBCC.Authorization.Properties;
+namespace NBCC.Authorization.DataAccess;
 
-namespace NBCC.Authorization.DataAccess
-{
-    public sealed class UserRepository : IUserRepository
+public sealed class UserRepository : IUserRepository
     {
         Connection Connection { get; }
 
@@ -24,4 +21,3 @@ namespace NBCC.Authorization.DataAccess
             });
         }
     }
-}

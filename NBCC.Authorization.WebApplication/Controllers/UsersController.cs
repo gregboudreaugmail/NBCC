@@ -1,14 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using NBCC.Authorization;
 using NBCC.Authorization.Commands;
-using NBCC.Authorization;
 using NBCC.Courses.Commands;
-using System.ComponentModel.DataAnnotations;
-using System.Net.Mime;
+namespace NBCC.WebApplication.Controllers;
 
-namespace NBCC.WebApplication.Controllers
-{
-    [Route("[controller]")]
+[Route("[controller]")]
     [ApiController]
     public sealed class UsersController : ControllerBase
     {
@@ -32,4 +27,3 @@ namespace NBCC.WebApplication.Controllers
             return Created(new Uri(Request.Path, UriKind.Relative), userName);
         }
     }
-}

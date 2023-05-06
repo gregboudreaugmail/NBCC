@@ -1,10 +1,7 @@
-﻿using Dapper;
-using System.Data.SqlClient;
-using NBCC.Authorization.Properties;
+﻿using NBCC.Authorization.Properties;
+namespace NBCC.Authorization.DataAccess;
 
-namespace NBCC.Authorization.DataAccess
-{
-    public sealed class RolesRepository : IRolesRepository
+public sealed class RolesRepository : IRolesRepository
     {
         Connection Connection { get; }
 
@@ -17,4 +14,3 @@ namespace NBCC.Authorization.DataAccess
             return await connection.QueryAsync<Role>(SqlScript.SELECT_Roles, new { roleID = roleId });
         }
     }
-}

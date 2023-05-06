@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-namespace NBCC.Courses.Commands;
+﻿namespace NBCC.Courses.Commands;
 
 public sealed class QueryDispatcher : IQueryDispatcher
 {

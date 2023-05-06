@@ -1,8 +1,5 @@
-﻿using Dapper;
-using NBCC.Logging.Models;
+﻿using NBCC.Logging.Models;
 using NBCC.Logging.Properties;
-using System.Data.SqlClient;
-
 namespace NBCC.Logging.DataAccess;
 
 public sealed class ExceptionLog : IExceptionLog

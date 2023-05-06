@@ -1,7 +1,4 @@
-﻿using Dapper;
-using NBCC.Courses.Properties;
-using System.Data.SqlClient;
-
+﻿using NBCC.Courses.Properties;
 namespace NBCC.Courses.DataAccess;
 
 public sealed class CourseRepository : ICourseRepository

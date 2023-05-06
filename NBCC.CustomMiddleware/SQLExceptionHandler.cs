@@ -1,7 +1,4 @@
-﻿using System.Data.SqlClient;
-using System.Text;
-
-namespace NBCC.WebApplication;
+﻿namespace NBCC.WebApplication;
 
 public static class SqlExceptionHandler
 {

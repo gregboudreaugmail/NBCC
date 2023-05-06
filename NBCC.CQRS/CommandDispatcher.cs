@@ -1,8 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using NBCC.Logging.Models;
-using static System.Reflection.Assembly;
-using static System.Text.Json.JsonSerializer;
-
+﻿using NBCC.Logging.Models;
 namespace NBCC.Courses.Commands;
 
 public sealed class CommandDispatcher : ICommandDispatcher
@@ -12,8 +8,8 @@ public sealed class CommandDispatcher : ICommandDispatcher
 
     public CommandDispatcher(IServiceProvider serviceProvider, ILoggerAsync logger)
     {
-        ServiceProvider = serviceProvider;
-        Logger = logger;
+        ServiceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+        Logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     public async Task Dispatch<TCommand>(TCommand command)

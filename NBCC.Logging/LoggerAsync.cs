@@ -1,7 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using NBCC.Logging.DataAccess;
+﻿using NBCC.Logging.DataAccess;
 using NBCC.Logging.Models;
+namespace NBCC.Logging;
 
 public sealed class LoggerAsync : ILoggerAsync
 {

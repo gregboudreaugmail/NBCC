@@ -1,16 +1,3 @@
-﻿namespace NBCC.Authorization.Commands
-{
-    public sealed record UserCommand
-    {
-        internal string UserName { get; }
-        internal string Password { get; }
-        internal string Email { get; }
+﻿namespace NBCC.Authorization.Commands;
 
-        public UserCommand(string userName, string password, string email)
-        {
-            UserName = userName;
-            Password = password;
-            Email = email;
-        }
-    }
-}
+public sealed record UserCommand(string UserName, string Password, string Email);

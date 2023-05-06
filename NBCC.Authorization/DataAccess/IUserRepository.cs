@@ -1,7 +1,6 @@
-﻿namespace NBCC.Authorization.DataAccess
+﻿namespace NBCC.Authorization.DataAccess;
+
+public interface IUserRepository
 {
-    public interface IUserRepository
-    {
-        Task Create(string username, string password, string email);
-    }
+    Task Create(string username, string password, string email);
 }

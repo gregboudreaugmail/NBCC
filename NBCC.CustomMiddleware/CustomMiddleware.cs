@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using NBCC.WebApplication.Messages;
-using System.Data.SqlClient;
-
+﻿using NBCC.WebApplication.Messages;
 namespace NBCC.WebApplication;
 
 public class CustomMiddleware

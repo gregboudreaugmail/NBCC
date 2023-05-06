@@ -2,5 +2,5 @@
 
 public static class CustomHeaders
 {
-    public const string AuthenticatedId = "AuthenticatedId";
+    public const string AuthenticatedId = nameof(AuthenticatedId);
 }

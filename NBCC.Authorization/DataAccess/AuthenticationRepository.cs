@@ -1,7 +1,4 @@
-﻿using Dapper;
-using NBCC.Authorization.Properties;
-using System.Data.SqlClient;
-
+﻿using NBCC.Authorization.Properties;
 namespace NBCC.Authorization.DataAccess;
 
 public sealed class AuthenticationRepository : IAuthenticationRepository

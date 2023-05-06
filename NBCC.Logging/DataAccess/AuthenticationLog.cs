@@ -1,10 +1,7 @@
-﻿using Dapper;
-using NBCC.Logging.Properties;
-using System.Data.SqlClient;
+﻿using NBCC.Logging.Properties;
+namespace NBCC.Logging.DataAccess;
 
-namespace NBCC.Logging.DataAccess
-{
-    public sealed class AuthenticationLog : IAuthenticationLog
+public sealed class AuthenticationLog : IAuthenticationLog
     {
         Connection Connection { get; }
 
@@ -25,4 +22,3 @@ namespace NBCC.Logging.DataAccess
             }
         }
     }
-}

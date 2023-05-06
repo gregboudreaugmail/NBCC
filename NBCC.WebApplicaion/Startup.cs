@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection.Extensions;
-using NBCC.Authorization.DataAccess;
+﻿using NBCC.Authorization.DataAccess;
 using NBCC.Courses.CommandHandlers;
 using NBCC.Courses.Commands;
 using NBCC.Courses.DataAccess;
@@ -7,10 +6,9 @@ using NBCC.Courses.WebApplication.Messages;
 using NBCC.Logging.DataAccess;
 using NBCC.Logging.Models;
 using NBCC.WebApplication;
-using LoggingConnection = NBCC.Logging.DataAccess.Connection;
-using CoursesConnection = NBCC.Courses.DataAccess.Connection;
 using AuthorizationConnection = NBCC.Authorization.DataAccess.Connection;
-using Microsoft.Extensions.Caching.Distributed;
+using CoursesConnection = NBCC.Courses.DataAccess.Connection;
+using LoggingConnection = NBCC.Logging.DataAccess.Connection;
 
 namespace NBCC.Courses.WebApplication;
 

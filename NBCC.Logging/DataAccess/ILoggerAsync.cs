@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using NBCC.Logging.Models;
+﻿using NBCC.Logging.Models;
 
 public interface ILoggerAsync
 {

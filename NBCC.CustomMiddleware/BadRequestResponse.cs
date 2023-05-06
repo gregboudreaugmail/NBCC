@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using NBCC.WebApplication.Extensions;
-using System.Net;
-
+﻿using NBCC.WebApplication.Extensions;
 namespace NBCC.WebApplication;
 
 public static class BadRequestResponse

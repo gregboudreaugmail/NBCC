@@ -1,8 +1,6 @@
 ﻿using NBCC.Authorization.DataAccess;
 using NBCC.Logging.DataAccess;
 using NBCC.Logging.Models;
-using System.Collections.ObjectModel;
-
 namespace NBCC.Authorization;
 
 public sealed class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
@@ -20,9 +18,9 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
         ISystemClock clock)
         : base(options, loggerFactory, encoder, clock)
     {
-        AuthenticationRepository = authenticationRepository;
-        AuthenticationSession = authenticationSession;
-        AuthenticationLog = authenticationLog;
+        AuthenticationRepository = authenticationRepository ?? throw new ArgumentNullException(nameof(authenticationRepository));
+        AuthenticationSession = authenticationSession ?? throw new ArgumentNullException(nameof(authenticationSession));
+        AuthenticationLog = authenticationLog ?? throw new ArgumentNullException(nameof(authenticationLog));
     }
 
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
