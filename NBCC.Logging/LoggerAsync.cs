@@ -1,5 +1,7 @@
 ﻿using NBCC.Logging.DataAccess;
 using NBCC.Logging.Models;
+using System;
+
 namespace NBCC.Logging;
 
 public sealed class LoggerAsync : ILoggerAsync
@@ -10,16 +12,16 @@ public sealed class LoggerAsync : ILoggerAsync
 
     public LoggerAsync(IInteractionLog interactionLog, IConfiguration configuration, IExceptionLog exceptionLog)
     {
-        InteractionLog = interactionLog;
-        Configuration = configuration;
-        ExceptionLog = exceptionLog;
+        InteractionLog = interactionLog ?? throw new ArgumentNullException(nameof(interactionLog));
+        Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+        ExceptionLog = exceptionLog ?? throw new ArgumentNullException(nameof(exceptionLog));
     }
 
     public bool IsEnabled(LogLevel logLevel)
     {
         if (Enum.TryParse<LogLevel>(Configuration["Logging:LogLevel:Default"], out var level))
             return logLevel >= level;
-        return false;
+        return true;
     }
 
     public async Task Log(LogLevel logLevel, Interaction interaction)
