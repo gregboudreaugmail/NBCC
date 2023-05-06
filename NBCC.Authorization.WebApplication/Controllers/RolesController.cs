@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NBCC.Authorization.Query;
 using NBCC.Authorization;
+using NBCC.Authorization.Query;
 using NBCC.Courses.Commands;
-using System.ComponentModel.DataAnnotations;
 using System.Net.Mime;
 
 namespace NBCC.WebApplication.Controllers
@@ -12,8 +11,8 @@ namespace NBCC.WebApplication.Controllers
     [ApiController]
     public sealed class RolesController : ControllerBase
     {
-        IQueryHandler<RolesQuery, IEnumerable<Role>> Messages { get; }
-        public RolesController(IQueryHandler<RolesQuery, IEnumerable<Role>> messages) => Messages = messages ?? throw new ArgumentNullException(nameof(messages));
+        IQueryHandler<RolesQuery, IEnumerable<Role>> Dispatcher { get; }
+        public RolesController(IQueryHandler<RolesQuery, IEnumerable<Role>> dispatcher) => Dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
 
         [HttpGet]
         [Authorize(Roles = Roles.Administrator)]
@@ -23,9 +22,6 @@ namespace NBCC.WebApplication.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Get))]
-        public async Task<IActionResult> Get(
-            [Display(Name = "Role ID")]
-            [Range(0, 2147483647)]
-                int? roleId) => Ok(await Messages.Handle(new RolesQuery(roleId)));
+        public async Task<IActionResult> Get(int? roleId) => Ok(await Dispatcher.Handle(new RolesQuery(roleId)));
     }
 }

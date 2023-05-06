@@ -59,7 +59,7 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
         var user = await AuthenticationRepository.GetUser(userName) ?? throw new NullReferenceException();
 
         var authenticatedId = await AuthenticationLog.Log(user.UserId);
-        AuthenticationSession.AssignAuthentication(authenticatedId, user.UserId);
+        AuthenticationSession.AssignAuthentication(authenticatedId);
 
         var claims = new Collection<Claim>
         {

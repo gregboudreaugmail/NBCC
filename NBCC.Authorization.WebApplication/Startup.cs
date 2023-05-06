@@ -8,7 +8,6 @@ using NBCC.Authorization.Query;
 using NBCC.Authorization.QueryHandlers;
 using NBCC.Authorization.WebApplication.Messages;
 using NBCC.Courses.Commands;
-using NBCC.Logging.DataAccess;
 using NBCC.WebApplication;
 using Connection = NBCC.Authorization.DataAccess.Connection;
 
