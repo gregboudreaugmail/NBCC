@@ -1,4 +1,4 @@
-﻿using NBCC.WebApplication.Messages;
+﻿using NBCC.Middleware.Messages;
 
 namespace NBCC.Courses.WebApplication.Messages;
 

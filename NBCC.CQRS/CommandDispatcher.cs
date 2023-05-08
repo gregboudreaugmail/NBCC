@@ -1,5 +1,5 @@
 ﻿using NBCC.Logging.Models;
-namespace NBCC.Courses.Commands;
+namespace NBCC.CQRS.Commands;
 
 public sealed class CommandDispatcher : ICommandDispatcher
 {

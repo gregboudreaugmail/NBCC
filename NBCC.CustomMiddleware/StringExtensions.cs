@@ -1,4 +1,4 @@
-﻿namespace NBCC.WebApplication.Extensions;
+﻿namespace NBCC.Middleware.Extensions;
 
 public static class StringExtensions
 {

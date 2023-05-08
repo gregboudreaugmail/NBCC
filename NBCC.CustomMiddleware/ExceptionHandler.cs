@@ -1,4 +1,4 @@
-﻿namespace NBCC.WebApplication;
+﻿namespace NBCC.Middleware;
 
 public static class ExceptionHandler
 {

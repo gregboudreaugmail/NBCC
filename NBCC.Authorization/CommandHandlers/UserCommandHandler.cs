@@ -1,6 +1,7 @@
 ﻿using NBCC.Authorization.Commands;
 using NBCC.Authorization.DataAccess;
-using NBCC.Courses.Commands;
+using NBCC.CQRS.Commands;
+
 namespace NBCC.Authorization.CommandHandlers;
 
 public sealed class UserCommandHandler : ICommandHandler<UserCommand>

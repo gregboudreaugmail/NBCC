@@ -1,5 +1,6 @@
-﻿using NBCC.WebApplication.Messages;
-namespace NBCC.WebApplication;
+﻿using NBCC.Middleware.Messages;
+
+namespace NBCC.Middleware;
 
 public class CustomMiddleware
 {

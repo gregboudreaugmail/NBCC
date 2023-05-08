@@ -1,4 +1,5 @@
 ﻿using NBCC.Courses.Properties;
+
 namespace NBCC.Courses.DataAccess;
 
 public sealed class CourseRepository : ICourseRepository

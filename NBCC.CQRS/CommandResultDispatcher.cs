@@ -1,4 +1,4 @@
-﻿namespace NBCC.Courses.Commands;
+﻿namespace NBCC.CQRS.Commands;
 
 public sealed class CommandResultDispatcher<TResult> : ICommandDispatcher<TResult>
 {

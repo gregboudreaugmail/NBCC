@@ -1,5 +1,6 @@
 ﻿using NBCC.Courses.Commands;
 using NBCC.Courses.DataAccess;
+using NBCC.CQRS.Commands;
 
 namespace NBCC.Courses.CommandHandlers;
 

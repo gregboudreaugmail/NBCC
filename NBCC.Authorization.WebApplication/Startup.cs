@@ -5,8 +5,8 @@ using NBCC.Authorization.DataAccess;
 using NBCC.Authorization.Query;
 using NBCC.Authorization.QueryHandlers;
 using NBCC.Authorization.WebApplication.Messages;
-using NBCC.Courses.Commands;
-using NBCC.WebApplication;
+using NBCC.CQRS.Commands;
+using NBCC.Middleware;
 using AuthorizationConnection = NBCC.Authorization.DataAccess.Connection;
 using LoggingConnection = NBCC.Logging.DataAccess.Connection;
 

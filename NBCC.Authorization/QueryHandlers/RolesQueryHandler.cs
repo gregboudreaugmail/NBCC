@@ -1,6 +1,7 @@
 ﻿using NBCC.Authorization.DataAccess;
 using NBCC.Authorization.Query;
-using NBCC.Courses.Commands;
+using NBCC.CQRS.Commands;
+
 namespace NBCC.Authorization.QueryHandlers;
 
 public sealed class RolesQueryHandler : IQueryHandler<RolesQuery, IEnumerable<Role>>

@@ -1,10 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <RootNamespace>NBCC.CQRS0_</RootNamespace>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+	  <TargetFramework>net7.0</TargetFramework>
+	  <Nullable>enable</Nullable>
+	  <RootNamespace>NBCC.CQRS</RootNamespace>
+	  <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+	  <Authors>Greg Boudreau</Authors>
+	  <Company>NBCC</Company>
+	  <Product>Demonstration</Product>
+	  <Description>Product Demonstration for CQRS</Description>
+	  <NeutralLanguage>en-CA</NeutralLanguage>
+	  <AssemblyVersion>1.0.0.0</AssemblyVersion>
+	  <FileVersion>1.0.0.0</FileVersion>
+	  <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>

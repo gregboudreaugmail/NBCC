@@ -1,8 +1,8 @@
 ﻿using NBCC.Authorization;
 using NBCC.Authorization.Query;
-using NBCC.Courses.Commands;
+using NBCC.CQRS.Commands;
 
-namespace NBCC.WebApplication.Controllers;
+namespace NBCC.Authentication.WebApplication.Controllers;
 
 [Route("[controller]")]
 [ApiController]

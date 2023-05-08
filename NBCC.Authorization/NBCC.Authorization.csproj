@@ -5,10 +5,10 @@
 		<Nullable>enable</Nullable>
 		<RootNamespace>NBCC.Authorizaion</RootNamespace>
 		<EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
-		<Authors>AUTHOR</Authors>
+		<Authors>Greg Boudreau</Authors>
 		<Company>NBCC</Company>
-		<Product>PROJECT</Product>
-		<Description>DESCRIPTION</Description>
+		<Product>Demonstration</Product>
+		<Description>Product Demonstration for Authorization</Description>
 		<NeutralLanguage>en-CA</NeutralLanguage>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<FileVersion>1.0.0.0</FileVersion>

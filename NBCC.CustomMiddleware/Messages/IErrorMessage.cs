@@ -1,4 +1,4 @@
-﻿namespace NBCC.WebApplication.Messages
+﻿namespace NBCC.Middleware.Messages
 {
     public interface IErrorMessage
     {

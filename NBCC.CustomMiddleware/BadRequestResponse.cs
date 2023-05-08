@@ -1,5 +1,5 @@
-﻿using NBCC.WebApplication.Extensions;
-namespace NBCC.WebApplication;
+﻿using NBCC.Middleware.Extensions;
+namespace NBCC.Middleware;
 
 public static class BadRequestResponse
 {

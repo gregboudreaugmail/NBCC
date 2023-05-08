@@ -1,6 +1,6 @@
-﻿using NBCC.WebApplication.Messages;
+﻿using NBCC.Middleware.Messages;
 
-namespace NBCC.WebApplication;
+namespace NBCC.Middleware;
 
 public static class CustomMiddlewareExtensions
 {

@@ -1,4 +1,4 @@
-﻿namespace NBCC.Courses.Commands;
+﻿namespace NBCC.CQRS.Commands;
 
 public interface IQueryHandler<in TQuery, TQueryResult>
 {
