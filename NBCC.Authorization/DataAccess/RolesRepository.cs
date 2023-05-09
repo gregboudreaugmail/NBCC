@@ -1,4 +1,5 @@
-﻿using NBCC.Authorization.Properties;
+﻿using NBCC.Authorization.Models;
+using NBCC.Authorization.Properties;
 namespace NBCC.Authorization.DataAccess;
 
 public sealed class RolesRepository : IRolesRepository

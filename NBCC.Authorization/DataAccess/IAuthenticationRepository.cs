@@ -1,4 +1,6 @@
-﻿namespace NBCC.Authorization.DataAccess;
+﻿using NBCC.Authorization.Models;
+
+namespace NBCC.Authorization.DataAccess;
 
 public interface IAuthenticationRepository
 {

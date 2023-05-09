@@ -1,4 +1,5 @@
-﻿using NBCC.Courses.Commands;
+﻿using NBCC.Authorization.Models;
+using NBCC.Courses.Commands;
 using NBCC.CQRS.Commands;
 
 namespace NBCC.Courses.WebApplication.Controllers;

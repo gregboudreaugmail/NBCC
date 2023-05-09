@@ -1,4 +1,4 @@
-﻿namespace NBCC.Authorization;
+﻿namespace NBCC.Authorization.Models;
 
 public static class Roles
 {

@@ -1,4 +1,4 @@
-﻿using NBCC.Authorization;
+﻿using NBCC.Authorization.Models;
 using NBCC.Authorization.Query;
 using NBCC.CQRS.Commands;
 

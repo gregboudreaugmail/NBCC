@@ -2,6 +2,6 @@
 
 public interface IAuthenticationSession
 {
-    int AuthenticationId { get; }
+    int? AuthenticationId { get; }
     void AssignAuthentication(int authenticationId);
 }

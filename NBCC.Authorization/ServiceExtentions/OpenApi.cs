@@ -1,4 +1,4 @@
-﻿namespace NBCC.Authorization;
+﻿namespace NBCC.Authorization.ServiceExtentions;
 
 public sealed class OpenApi
 {

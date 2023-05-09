@@ -1,5 +1,7 @@
-﻿namespace NBCC.Authorization;
-public sealed class Authenticate
+﻿using NBCC.Authorization.Models;
+
+namespace NBCC.Authorization;
+public sealed class Hashing
 {
     const int HashSize = 512;
     const int SaltSize = 512;

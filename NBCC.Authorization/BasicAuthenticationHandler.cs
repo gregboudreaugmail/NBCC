@@ -1,17 +1,18 @@
 ﻿using NBCC.Authorization.DataAccess;
-using NBCC.Logging.DataAccess;
-using NBCC.Logging.Models;
+using NBCC.Authorization.Models;
+
 namespace NBCC.Authorization;
 
 public sealed class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
     IAuthenticationRepository AuthenticationRepository { get; }
-    IAuthenticationSession AuthenticationSession { get; }
-    IAuthenticationLog AuthenticationLog { get; }
+    ITicketCreator TicketCreator { get; }
+    ILoggerAsync LoggerAsync { get; }
+    User? AuthorizedUser { get; set; }
 
     public BasicAuthenticationHandler(IAuthenticationRepository authenticationRepository,
-        IAuthenticationSession authenticationSession,
-        IAuthenticationLog authenticationLog,
+        ITicketCreator ticketCreator, 
+        ILoggerAsync loggerAsync,
         IOptionsMonitor<AuthenticationSchemeOptions> options,
         ILoggerFactory loggerFactory,
         UrlEncoder encoder,
@@ -19,61 +20,39 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
         : base(options, loggerFactory, encoder, clock)
     {
         AuthenticationRepository = authenticationRepository ?? throw new ArgumentNullException(nameof(authenticationRepository));
-        AuthenticationSession = authenticationSession ?? throw new ArgumentNullException(nameof(authenticationSession));
-        AuthenticationLog = authenticationLog ?? throw new ArgumentNullException(nameof(authenticationLog));
+        TicketCreator = ticketCreator ?? throw new ArgumentNullException(nameof(ticketCreator));
+        LoggerAsync = loggerAsync ?? throw new ArgumentNullException(nameof(loggerAsync));
+    }
+
+    protected override Task HandleChallengeAsync(AuthenticationProperties properties)
+    {
+        LoggerAsync.Log(new UnauthorizedAccessException($"Username {AuthorizedUser?.UserName}"));
+        return base.HandleChallengeAsync(properties);
     }
 
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
-        string? userName;
         try
         {
-            userName = ExtractUserNameAndPassword(out var password);
+            AuthorizedUser = ExtractUserNameAndPassword();
 
-            var authenticated = await AuthenticationRepository.AuthenticateUser(userName, password);
-            if (!authenticated) throw new ArgumentException("Invalid credentials");
+            var authenticated = await AuthenticationRepository.AuthenticateUser(AuthorizedUser.UserName, AuthorizedUser.Password);
+            if (!authenticated) throw new ArgumentException(string.Empty);
+
+            return await Task.FromResult(AuthenticateResult.Success(await TicketCreator.GetTicket(AuthorizedUser.UserName)));
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            return await Task.FromResult(AuthenticateResult.Fail($"AuthenticationSession failed: {ex.Message}"));
-        }
-
-        return await Task.FromResult(AuthenticateResult.Success(await GetTicket(userName)));
-
-
-        string ExtractUserNameAndPassword(out string password)
-        {
-            var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
-
-            var credentials = Encoding.UTF8.GetString(
-                Convert.FromBase64String(authHeader.Parameter ?? string.Empty)).Split(':');
-            password = credentials.LastOrDefault() ?? string.Empty;
-            return credentials.FirstOrDefault() ?? string.Empty;
+            return await Task.FromResult(AuthenticateResult.Fail(string.Empty));
         }
     }
-
-    private async Task<AuthenticationTicket> GetTicket(string userName)
+    User ExtractUserNameAndPassword()
     {
-        var user = await AuthenticationRepository.GetUser(userName) ?? throw new NullReferenceException();
+        var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
 
-        var authenticatedId = await AuthenticationLog.Log(user.UserId);
-        AuthenticationSession.AssignAuthentication(authenticatedId);
-
-        var claims = new Collection<Claim>
-        {
-            new(ClaimTypes.NameIdentifier, user.ToString()),
-            new(ClaimTypes.Name, user.UserName),
-            new(ClaimTypes.Email, user.Email)
-        };
-        foreach (var roleName in from fieldsInRoles in typeof(Roles).GetFields()
-                 let fieldName = fieldsInRoles.GetValue(null)?.ToString() ?? string.Empty
-                 where user.Roles.Select(_ => _.RoleName).Contains(fieldName)
-                 select fieldName)
-            claims.Add(new Claim(ClaimTypes.Role, roleName));
-
-        var identity = new ClaimsIdentity(claims, Scheme.Name);
-        var principal = new ClaimsPrincipal(identity);
-        var ticket = new AuthenticationTicket(principal, Scheme.Name);
-        return ticket;
+        var credentials = Encoding.UTF8.GetString(
+            Convert.FromBase64String(authHeader.Parameter ?? string.Empty)).Split(':');
+        return new User(credentials.FirstOrDefault() ?? string.Empty, credentials.LastOrDefault() ?? string.Empty);
     }
+    record User(string UserName, string Password);
 }

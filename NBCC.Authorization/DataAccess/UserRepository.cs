@@ -11,7 +11,7 @@ public sealed class UserRepository : IUserRepository
         public async Task Create(string userName, string password, string email)
         {
             await using SqlConnection connection = new(Connection.Value);
-            var credentials = Authenticate.GenerateSaltedHash(password);
+            var credentials = Hashing.GenerateSaltedHash(password);
             await connection.ExecuteAsync(SqlScript.INSERT_User, new
             {
                 userName,

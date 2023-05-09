@@ -5,11 +5,11 @@ namespace NBCC.Middleware;
 public class CustomMiddleware
 {
     RequestDelegate Next { get; }
-    IErrorMessage? ErrorMessage { get; }
+    ErrorMessage? ErrorMessage { get; }
     ILoggerAsync? Logger { get; }
 
     public CustomMiddleware(RequestDelegate next) => Next = next;
-    public CustomMiddleware(RequestDelegate next, IErrorMessage errorMessage, ILoggerAsync logger)
+    public CustomMiddleware(RequestDelegate next, ErrorMessage errorMessage, ILoggerAsync logger)
     {
         Next = next;
         ErrorMessage = errorMessage;
@@ -21,7 +21,7 @@ public class CustomMiddleware
         Logger = logger;
     }
 
-    public CustomMiddleware(RequestDelegate next, IErrorMessage errorMessage)
+    public CustomMiddleware(RequestDelegate next, ErrorMessage errorMessage)
     {
         Next = next;
         ErrorMessage = errorMessage;

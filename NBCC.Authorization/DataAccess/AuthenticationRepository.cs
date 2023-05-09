@@ -1,4 +1,5 @@
-﻿using NBCC.Authorization.Properties;
+﻿using NBCC.Authorization.Models;
+using NBCC.Authorization.Properties;
 namespace NBCC.Authorization.DataAccess;
 
 public sealed class AuthenticationRepository : IAuthenticationRepository
@@ -32,7 +33,6 @@ public sealed class AuthenticationRepository : IAuthenticationRepository
     {
         await using SqlConnection connection = new(Connection.Value);
         var persistedCredentials = await connection.QueryFirstOrDefaultAsync<HashSalt>(SqlScript.SELECT_passwordByUserName, new { userName });
-        return (persistedCredentials == null || Authenticate.VerifyPassword(password, persistedCredentials.Hash, persistedCredentials.Password));
-
+        return persistedCredentials != null && Hashing.VerifyPassword(password, persistedCredentials.Hash, persistedCredentials.Password);
     }
 }

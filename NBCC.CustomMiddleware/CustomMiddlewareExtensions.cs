@@ -7,6 +7,6 @@ public static class CustomMiddlewareExtensions
     public static IApplicationBuilder UseCustomMiddleware(this IApplicationBuilder builder) 
         => builder.UseMiddleware<CustomMiddleware>();
 
-    public static IApplicationBuilder UseCustomMiddleware(this IApplicationBuilder builder, IErrorMessage errorMessage)
+    public static IApplicationBuilder UseCustomMiddleware(this IApplicationBuilder builder, ErrorMessage errorMessage)
        => builder.UseMiddleware<CustomMiddleware>(errorMessage);
 }

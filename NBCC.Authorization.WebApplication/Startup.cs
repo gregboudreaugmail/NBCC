@@ -2,8 +2,10 @@
 using NBCC.Authorization.CommandHandlers;
 using NBCC.Authorization.Commands;
 using NBCC.Authorization.DataAccess;
+using NBCC.Authorization.Models;
 using NBCC.Authorization.Query;
 using NBCC.Authorization.QueryHandlers;
+using NBCC.Authorization.ServiceExtentions;
 using NBCC.Authorization.WebApplication.Messages;
 using NBCC.CQRS.Commands;
 using NBCC.Middleware;

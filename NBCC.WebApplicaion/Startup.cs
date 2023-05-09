@@ -1,13 +1,15 @@
 ﻿using NBCC.Authorization.DataAccess;
+using NBCC.Authorization.Models;
+using NBCC.Authorization.ServiceExtentions;
 using NBCC.Courses.CommandHandlers;
 using NBCC.Courses.Commands;
 using NBCC.Courses.DataAccess;
-using NBCC.Courses.WebApplication.Messages;
 using NBCC.CQRS.Commands;
 using NBCC.Logging;
 using NBCC.Logging.DataAccess;
 using NBCC.Logging.Models;
 using NBCC.Middleware;
+using NBCC.Middleware.Messages;
 using AuthorizationConnection = NBCC.Authorization.DataAccess.Connection;
 using CoursesConnection = NBCC.Courses.DataAccess.Connection;
 using LoggingConnection = NBCC.Logging.DataAccess.Connection;
@@ -24,12 +26,8 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddDistributedMemoryCache();
-        services.AddSession(options =>
-        {
-            options.IdleTimeout = TimeSpan.FromSeconds(60);
-        });
-        services.AddMemoryCache();
+
+        services.AddTransient<ITicketCreator, TicketCreator>();
         services.AddControllers();
         services.AddHttpContextAccessor();
         services.AddEndpointsApiExplorer();
@@ -48,19 +46,21 @@ public class Startup
         services.AddTransient<ICommandHandler<CoursesCommand>, CoursesCommandHandler>();
         services.TryAddSingleton(new LoggingConnection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
         services.TryAddSingleton(new CoursesConnection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
-        services.TryAddSingleton(Configuration.GetRequiredSection(nameof(Message)).Get<Message>() ?? new Message());
+
+        services.TryAddSingleton(Configuration.
+            GetRequiredSection("Messages").Get<ErrorMessage>() ?? new ErrorMessage());
+        
         services.TryAddSingleton(new AuthorizationConnection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
         services.AddAuthentication(BasicAuthentication)
             .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>(BasicAuthentication, null);
     }
 
-    public void Configure(IApplicationBuilder app, Message message)
+    public void Configure(IApplicationBuilder app, ErrorMessage errorMessage)
     {
-        app.UseCustomMiddleware(message)
+        app.UseCustomMiddleware(errorMessage)
             .UseSwagger()
             .UseSwaggerUI()
             .UseRouting()
-            .UseSession()
             .UseAuthentication()
             .UseAuthorization()
             .UseEndpoints(_ => _.MapControllers());

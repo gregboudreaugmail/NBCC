@@ -1,4 +1,5 @@
 ﻿using NBCC.Authorization.DataAccess;
+using NBCC.Authorization.Models;
 using NBCC.Authorization.Query;
 using NBCC.CQRS.Commands;
 

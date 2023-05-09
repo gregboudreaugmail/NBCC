@@ -1,5 +1,5 @@
-﻿using NBCC.Authorization;
-using NBCC.Authorization.Commands;
+﻿using NBCC.Authorization.Commands;
+using NBCC.Authorization.Models;
 using NBCC.CQRS.Commands;
 namespace NBCC.Authentication.WebApplication.Controllers;
 
