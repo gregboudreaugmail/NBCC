@@ -61,6 +61,17 @@ namespace NBCC.Courses.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to UPDATE College.Courses
+        ///SET IsArchived = 1
+        ///WHERE CourseId = @CourseId.
+        /// </summary>
+        public static string ARCHIVE_Courses {
+            get {
+                return ResourceManager.GetString("ARCHIVE_Courses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to INSERT INTO [College].[Courses]
         ///           ([CourseName])
         ///     VALUES

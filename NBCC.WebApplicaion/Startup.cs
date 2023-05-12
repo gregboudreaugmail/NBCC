@@ -43,7 +43,8 @@ public class Startup
         services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
         services.AddTransient<IAuthenticationSession, AuthenticationSession>();
-        services.AddTransient<ICommandHandler<CoursesCommand>, CoursesCommandHandler>();
+        services.AddTransient<ICommandHandler<MakeCoursesCommand>, MakeCoursesCommandHandler>();
+        services.AddTransient<ICommandHandler<ArchiveCoursesCommand>, ArchiveCoursesCommandHandler>();
         services.TryAddSingleton(new LoggingConnection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
         services.TryAddSingleton(new CoursesConnection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
 

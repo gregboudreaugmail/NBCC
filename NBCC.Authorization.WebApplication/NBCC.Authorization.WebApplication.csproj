@@ -18,7 +18,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\NBCC.Authorization\NBCC.Authorization.csproj" />
 		<ProjectReference Include="..\NBCC.CQRS\NBCC.CQRS.csproj" />
-		<ProjectReference Include="..\NBCC.CustomMiddleware\NBCC.CustomMiddleware.csproj"/>
+		<ProjectReference Include="..\NBCC.CustomMiddleware\NBCC.CustomMiddleware.csproj" />
 		<ProjectReference Include="..\NBCC.Logging\NBCC.Logging.csproj" />
 	</ItemGroup>
 

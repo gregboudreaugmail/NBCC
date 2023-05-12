@@ -20,9 +20,24 @@ public sealed class CoursesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Post))]
-    public async Task<IActionResult> Post([Required][MaxLength(50)] string courseName)
+    public async Task<IActionResult> MakeCourse([Required][MaxLength(50)] string courseName)
     {
-        await Dispatcher.Dispatch(new CoursesCommand(courseName));
+        await Dispatcher.Dispatch(new MakeCoursesCommand(courseName));
         return Created(new Uri(Request.Path, UriKind.Relative), courseName);
+    }
+
+    [HttpDelete]
+    [Authorize(Roles = $"{Roles.Administrator},{Roles.Instructor}")]
+    [Consumes(MediaTypeNames.Application.Json)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Delete))]
+    public async Task<IActionResult> ArchiveCourse([Required] int courseId)
+    {
+        await Dispatcher.Dispatch(new ArchiveCoursesCommand(courseId));
+        return Ok();
     }
 }
