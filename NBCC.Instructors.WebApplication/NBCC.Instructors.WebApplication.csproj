@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
@@ -23,5 +23,10 @@
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0">
 			<TreatAsUsed>true</TreatAsUsed>
 		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\NBCC.Authorization\NBCC.Authorization.csproj" />
+	  <ProjectReference Include="..\NBCC.CustomMiddleware\NBCC.CustomMiddleware.csproj" />
 	</ItemGroup>
 </Project>

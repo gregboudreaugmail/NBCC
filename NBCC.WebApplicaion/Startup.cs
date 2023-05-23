@@ -10,6 +10,7 @@ using NBCC.Logging.DataAccess;
 using NBCC.Logging.Models;
 using NBCC.Middleware;
 using NBCC.Middleware.Messages;
+using NBCC.WebRequest;
 using AuthorizationConnection = NBCC.Authorization.DataAccess.Connection;
 using CoursesConnection = NBCC.Courses.DataAccess.Connection;
 using LoggingConnection = NBCC.Logging.DataAccess.Connection;
@@ -29,6 +30,8 @@ public class Startup
 
         services.AddTransient<ITicketCreator, TicketCreator>();
         services.AddControllers();
+        services.AddHttpClient();
+        services.AddTransient<IPost, Post>();
         services.AddHttpContextAccessor();
         services.AddEndpointsApiExplorer();
         services.AddTransient<IUser, User>();
@@ -49,7 +52,7 @@ public class Startup
         services.TryAddSingleton(new CoursesConnection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
 
         services.TryAddSingleton(Configuration.
-            GetRequiredSection("Messages").Get<ErrorMessage>() ?? new ErrorMessage());
+            GetSection("Messages").Get<ErrorMessage>() ?? new ErrorMessage());
         
         services.TryAddSingleton(new AuthorizationConnection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
         services.AddAuthentication(BasicAuthentication)

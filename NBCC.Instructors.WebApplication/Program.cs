@@ -1,6 +1,9 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+namespace NBCC.Instructors.WebApplication;
 
-app.MapGet("/", () => "Hello World!");
-
-app.Run();
+public class Program
+{
+    public static void Main(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(static webBuilder => webBuilder.UseStartup<Startup>())
+            .Build().Run();
+}

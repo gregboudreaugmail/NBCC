@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NBCC.CQRS\NBCC.CQRS.csproj" />
+    <ProjectReference Include="..\NBCC.WebRequest\NBCC.WebRequest.csproj" />
   </ItemGroup>
 
   <ItemGroup>

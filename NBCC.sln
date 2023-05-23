@@ -29,6 +29,8 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "CommunityCollege", "Communi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBCC.Instructors.WebApplication", "NBCC.Instructors.WebApplication\NBCC.Instructors.WebApplication.csproj", "{B119FAAF-EB13-4091-A405-D4F63F16F0F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NBCC.WebRequest", "NBCC.WebRequest\NBCC.WebRequest.csproj", "{2E44CA04-732C-4CE4-BC07-BC875F18E5C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{B119FAAF-EB13-4091-A405-D4F63F16F0F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B119FAAF-EB13-4091-A405-D4F63F16F0F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B119FAAF-EB13-4091-A405-D4F63F16F0F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E44CA04-732C-4CE4-BC07-BC875F18E5C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E44CA04-732C-4CE4-BC07-BC875F18E5C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E44CA04-732C-4CE4-BC07-BC875F18E5C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E44CA04-732C-4CE4-BC07-BC875F18E5C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +93,7 @@ Global
 		{B57A7C68-625B-43A1-950C-276E0771D4B6} = {1E0FF1F0-ED18-4CCA-BA96-9057685CB803}
 		{AEDA41E4-B16B-455C-8151-389BA4CBFD67} = {F6E11617-7484-4261-B308-7CA481D60C26}
 		{B119FAAF-EB13-4091-A405-D4F63F16F0F9} = {75215DF1-DD20-47A6-87A3-44A6FCEB1E9E}
+		{2E44CA04-732C-4CE4-BC07-BC875F18E5C7} = {1E0FF1F0-ED18-4CCA-BA96-9057685CB803}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {14B61A31-25C9-414A-A80B-FC3314C54865}
