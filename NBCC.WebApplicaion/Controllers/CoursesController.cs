@@ -24,7 +24,7 @@ public sealed class CoursesController : ControllerBase
     public async Task<IActionResult> MakeCourse([Required][MaxLength(50)] string courseName) => 
         await MakeCourse(courseName, null);
 
-    [HttpPost]
+    [HttpPost("WithAssignment")]
     [Authorize(Roles = $"{Roles.Administrator},{Roles.Instructor}")]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status201Created)]
@@ -38,7 +38,6 @@ public sealed class CoursesController : ControllerBase
         await Dispatcher.Dispatch(new MakeCoursesCommand(courseName, instructorId));
         return Created(new Uri(Request.Path, UriKind.Relative), courseName);
     }
-
 
     [HttpDelete]
     [Authorize(Roles = $"{Roles.Administrator},{Roles.Instructor}")]
