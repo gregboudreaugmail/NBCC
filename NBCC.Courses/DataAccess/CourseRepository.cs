@@ -1,4 +1,5 @@
-﻿using NBCC.Courses.Properties;
+﻿using NBCC.Courses.Models;
+using NBCC.Courses.Properties;
 
 namespace NBCC.Courses.DataAccess;
 
@@ -18,5 +19,11 @@ public sealed class CourseRepository : ICourseRepository
     {
         await using SqlConnection connection = new(Connection.Value);
         await connection.ExecuteAsync(SqlScript.ARCHIVE_Courses, new { courseId });
+    }
+
+    public async Task<IEnumerable<Course>> GetCourses()
+    {
+        await using SqlConnection connection = new(Connection.Value);
+        return await connection.QueryAsync<Course>(SqlScript.SELECT_Courses);
     }
 }

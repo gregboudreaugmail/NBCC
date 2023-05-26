@@ -83,5 +83,18 @@ namespace NBCC.Courses.Properties {
                 return ResourceManager.GetString("INSERT_Courses", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT [CourseId]
+        ///      ,[CourseName]
+        ///FROM College.Courses
+        ///WHERE IsArchived = 0
+        ///.
+        /// </summary>
+        public static string SELECT_Courses {
+            get {
+                return ResourceManager.GetString("SELECT_Courses", resourceCulture);
+            }
+        }
     }
 }

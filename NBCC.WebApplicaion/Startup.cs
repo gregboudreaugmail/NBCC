@@ -4,6 +4,9 @@ using NBCC.Authorization.ServiceExtentions;
 using NBCC.Courses.CommandHandlers;
 using NBCC.Courses.Commands;
 using NBCC.Courses.DataAccess;
+using NBCC.Courses.Models;
+using NBCC.Courses.Queries;
+using NBCC.Courses.QueryHandlers;
 using NBCC.CQRS.Commands;
 using NBCC.Logging;
 using NBCC.Logging.DataAccess;
@@ -48,6 +51,7 @@ public class Startup
         services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
         services.AddTransient<IAuthenticationSession, AuthenticationSession>();
         services.AddTransient<ICommandHandler<MakeCoursesCommand, int>, MakeCoursesCommandHandler>();
+        services.AddTransient<IQueryHandler<CoursesQuery, IEnumerable<Course>>, CoursesQueryHandler>();
         services.AddTransient<ICommandHandler<ArchiveCoursesCommand>, ArchiveCoursesCommandHandler>();
         services.TryAddSingleton(new LoggingConnection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
         services.TryAddSingleton(new CoursesConnection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
