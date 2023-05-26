@@ -8,10 +8,10 @@ public sealed class CourseRepository : ICourseRepository
     public CourseRepository(Connection connection) =>
         Connection = connection ?? throw new ArgumentNullException(nameof(connection));
 
-    public async Task Make(string courseName)
+    public async Task<int> Make(string courseName)
     {
         await using SqlConnection connection = new(Connection.Value);
-        await connection.ExecuteAsync(SqlScript.INSERT_Courses, new { courseName });
+        return await connection.QuerySingleAsync<int>(SqlScript.INSERT_Courses, new { courseName });
     }
 
     public async Task Archive(int courseId)

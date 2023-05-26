@@ -2,3 +2,4 @@
            ([CourseName])
      VALUES
            (@courseName)
+SELECT @@IDENTITY

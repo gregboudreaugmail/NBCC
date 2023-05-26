@@ -75,7 +75,8 @@ namespace NBCC.Courses.Properties {
         ///   Looks up a localized string similar to INSERT INTO [College].[Courses]
         ///           ([CourseName])
         ///     VALUES
-        ///           (@courseName).
+        ///           (@courseName)
+        ///SELECT @@IDENTITY.
         /// </summary>
         public static string INSERT_Courses {
             get {

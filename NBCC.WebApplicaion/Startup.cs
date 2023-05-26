@@ -43,10 +43,11 @@ public class Startup
         services.TryAddSingleton<IQueryDispatcher, QueryDispatcher>();
         services.AddTransient<IAuthenticationLog, AuthenticationLog>();
         services.TryAddSingleton<ICommandDispatcher, CommandDispatcher>();
+        services.TryAddSingleton<ICommandDispatcher<int>, CommandDispatcher<int>>();
         services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
         services.AddTransient<IAuthenticationSession, AuthenticationSession>();
-        services.AddTransient<ICommandHandler<MakeCoursesCommand>, MakeCoursesCommandHandler>();
+        services.AddTransient<ICommandHandler<MakeCoursesCommand, int>, MakeCoursesCommandHandler>();
         services.AddTransient<ICommandHandler<ArchiveCoursesCommand>, ArchiveCoursesCommandHandler>();
         services.TryAddSingleton(new LoggingConnection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
         services.TryAddSingleton(new CoursesConnection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));

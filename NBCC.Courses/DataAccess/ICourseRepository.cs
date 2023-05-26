@@ -2,6 +2,6 @@
 
 public interface ICourseRepository
 {
-    Task Make(string courseName);
+    Task<int> Make(string courseName);
     Task Archive(int courseId);
 }
