@@ -11,5 +11,5 @@ public sealed class CoursesQueryHandler : IQueryHandler<CoursesQuery, IEnumerabl
 
     public CoursesQueryHandler(ICourseRepository courseRepository) => CourseRepository = courseRepository;
 
-    public async Task<IEnumerable<Course>> Handle(CoursesQuery query) => await CourseRepository.GetCourses();
+    public async Task<IEnumerable<Course>> Handle(CoursesQuery query) => await CourseRepository.Get();
 }

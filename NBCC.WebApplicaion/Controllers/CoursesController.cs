@@ -1,5 +1,4 @@
 ﻿using NBCC.Authorization.Models;
-using NBCC.Authorization.Query;
 using NBCC.Courses.Commands;
 using NBCC.Courses.Models;
 using NBCC.Courses.Queries;

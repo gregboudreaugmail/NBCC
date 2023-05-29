@@ -6,5 +6,5 @@ public interface ICourseRepository
 {
     Task<int> Make(string courseName);
     Task Archive(int courseId);
-    Task<IEnumerable<Course>> GetCourses();
+    Task<IEnumerable<Course>> Get();
 }

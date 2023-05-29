@@ -31,6 +31,10 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
 
+        services.AddTransient<ICourseRepository, CourseRepository>();
+        services.AddTransient<ICommandHandler<MakeCoursesCommand, int>, MakeCoursesCommandHandler>();
+        services.AddTransient<IQueryHandler<CoursesQuery, IEnumerable<Course>>, CoursesQueryHandler>();
+        services.AddTransient<ICommandHandler<ArchiveCoursesCommand>, ArchiveCoursesCommandHandler>();
         services.AddTransient<ITicketCreator, TicketCreator>();
         services.AddControllers();
         services.AddHttpClient();
@@ -42,7 +46,6 @@ public class Startup
         services.AddSwaggerGen(OpenApi.AddAuthentication());
         services.AddTransient<IExceptionLog, ExceptionLog>();
         services.AddTransient<IInteractionLog, InteractionLog>();
-        services.AddTransient<ICourseRepository, CourseRepository>();
         services.TryAddSingleton<IQueryDispatcher, QueryDispatcher>();
         services.AddTransient<IAuthenticationLog, AuthenticationLog>();
         services.TryAddSingleton<ICommandDispatcher, CommandDispatcher>();
@@ -50,9 +53,6 @@ public class Startup
         services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
         services.AddTransient<IAuthenticationSession, AuthenticationSession>();
-        services.AddTransient<ICommandHandler<MakeCoursesCommand, int>, MakeCoursesCommandHandler>();
-        services.AddTransient<IQueryHandler<CoursesQuery, IEnumerable<Course>>, CoursesQueryHandler>();
-        services.AddTransient<ICommandHandler<ArchiveCoursesCommand>, ArchiveCoursesCommandHandler>();
         services.TryAddSingleton(new LoggingConnection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
         services.TryAddSingleton(new CoursesConnection(Configuration["ConnectionStrings:Connection"] ?? string.Empty));
 

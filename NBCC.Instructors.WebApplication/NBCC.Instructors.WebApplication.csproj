@@ -28,5 +28,6 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\NBCC.Authorization\NBCC.Authorization.csproj" />
 	  <ProjectReference Include="..\NBCC.CustomMiddleware\NBCC.CustomMiddleware.csproj" />
+	  <ProjectReference Include="..\NBCC.Instructors\NBCC.Instructors.csproj" />
 	</ItemGroup>
 </Project>

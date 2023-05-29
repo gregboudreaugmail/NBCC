@@ -8,8 +8,8 @@ namespace NBCC.Authentication.WebApplication.Controllers;
 [ApiController]
 public sealed class RolesController : ControllerBase
 {
-    IQueryHandler<RolesQuery, IEnumerable<Role>> Dispatcher { get; }
-    public RolesController(IQueryHandler<RolesQuery, IEnumerable<Role>> dispatcher) => Dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
+    IQueryHandler<RolesQuery, IEnumerable<Role>> QueryHandler { get; }
+    public RolesController(IQueryHandler<RolesQuery, IEnumerable<Role>> queryHandler) => QueryHandler = queryHandler ?? throw new ArgumentNullException(nameof(queryHandler));
 
     [HttpGet]
     [Authorize(Roles = Roles.Administrator)]
@@ -19,5 +19,5 @@ public sealed class RolesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Get))]
-    public async Task<IActionResult> Get(int? roleId) => Ok(await Dispatcher.Handle(new RolesQuery(roleId)));
+    public async Task<IActionResult> Get(int? roleId) => Ok(await QueryHandler.Handle(new RolesQuery(roleId)));
 }

@@ -12,16 +12,16 @@ public sealed class CourseRepository : ICourseRepository
     public async Task<int> Make(string courseName)
     {
         await using SqlConnection connection = new(Connection.Value);
-        return await connection.QuerySingleAsync<int>(SqlScript.INSERT_Courses, new { courseName });
+        return await connection.QuerySingleAsync<int>(SqlScript.INSERT_Courses, new { instructorName = courseName });
     }
 
     public async Task Archive(int courseId)
     {
         await using SqlConnection connection = new(Connection.Value);
-        await connection.ExecuteAsync(SqlScript.ARCHIVE_Courses, new { courseId });
+        await connection.ExecuteAsync(SqlScript.ARCHIVE_Courses, new { instructorId = courseId });
     }
 
-    public async Task<IEnumerable<Course>> GetCourses()
+    public async Task<IEnumerable<Course>> Get()
     {
         await using SqlConnection connection = new(Connection.Value);
         return await connection.QueryAsync<Course>(SqlScript.SELECT_Courses);
