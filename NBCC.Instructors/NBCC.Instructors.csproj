@@ -15,6 +15,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\NBCC.Alerts\NBCC.Alerts.csproj" />
 		<ProjectReference Include="..\NBCC.CQRS\NBCC.CQRS.csproj" />
 		<ProjectReference Include="..\NBCC.WebRequest\NBCC.WebRequest.csproj" />
 	</ItemGroup>

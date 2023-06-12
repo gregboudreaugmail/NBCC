@@ -1,22 +1,22 @@
 ﻿using NBCC.Authorization.Models;
-using NBCC.Instructors.Commands;
+using NBCC.CQRS.Commands;
+using NBCC.Instructors.Commands.Assignments;
 using NBCC.Instructors.Models;
 using NBCC.Instructors.Queries;
-using NBCC.CQRS.Commands;
 
 namespace NBCC.Instructors.WebApplication.Controllers;
 
 [Route("[controller]")]
 [ApiController]
-public sealed class InstructorsController : ControllerBase
+public class AssignmentController : ControllerBase
 {
     ICommandDispatcher<int> ValueDispatcher { get; }
     ICommandDispatcher Dispatcher { get; }
-    IQueryHandler<InstructorsQuery, IEnumerable<Instructor>> QueryHandler { get; }
+    IQueryHandler<AssignmentsQuery, IEnumerable<Assignment>> QueryHandler { get; }
 
-    public InstructorsController(ICommandDispatcher<int> valueDispatcher,
+    public AssignmentController(ICommandDispatcher<int> valueDispatcher,
         ICommandDispatcher dispatcher,
-        IQueryHandler<InstructorsQuery, IEnumerable<Instructor>> queryHandler)
+        IQueryHandler<AssignmentsQuery, IEnumerable<Assignment>> queryHandler)
     {
         ValueDispatcher = valueDispatcher ?? throw new ArgumentNullException(nameof(valueDispatcher));
         Dispatcher = dispatcher ?? throw new ArgumentNullException(nameof(dispatcher));
@@ -32,10 +32,10 @@ public sealed class InstructorsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Post))]
-    public async Task<IActionResult> AddInstructor([Required][MaxLength(50)] string firstName, [Required][MaxLength(50)] string lastName, [Required][MaxLength(255)] string email)
+    public async Task<IActionResult> AddAssignment([Required] int instructorId, [Required] int courseId)
     {
-        var instructorId = await ValueDispatcher.Dispatch(new AddInstructorCommand(firstName, lastName, email));
-        return Created(new Uri(Request.Path, UriKind.Relative), instructorId);
+        var assignmentId = await ValueDispatcher.Dispatch(new AddAssignmentCommand(instructorId, courseId));
+        return Created(new Uri(Request.Path, UriKind.Relative), assignmentId);
     }
 
     [HttpGet]
@@ -46,7 +46,7 @@ public sealed class InstructorsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Get))]
-    public async Task<IActionResult> GetInstructors() => Ok(await QueryHandler.Handle(new InstructorsQuery()));
+    public async Task<IActionResult> GetAssignments([Required] int instructorId) => Ok(await QueryHandler.Handle(new AssignmentsQuery(instructorId)));
 
     [HttpDelete]
     [Authorize(Roles = $"{Roles.Administrator},{Roles.Instructor}")]
@@ -57,9 +57,9 @@ public sealed class InstructorsController : ControllerBase
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Delete))]
-    public async Task<IActionResult> ArchiveInstructor([Required] int instructorId)
+    public async Task<IActionResult> ArchiveAssignments([Required] int instructorId, [Required] int courseId)
     {
-        await Dispatcher.Dispatch(new ArchiveInstructorCommand(instructorId));
+        await Dispatcher.Dispatch(new ArchiveAssignmentsCommand(instructorId, courseId));
         return Ok();
     }
 }

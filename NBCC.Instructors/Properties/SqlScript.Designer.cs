@@ -61,6 +61,21 @@ namespace NBCC.Instructors.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to UPDATE [College].[Assignments]
+        ///   SET IsArchived = 1
+        /// WHERE [InstructorId] = @InstructorId
+        /// 
+        ///
+        ///
+        ///.
+        /// </summary>
+        internal static string ARCHIVE_Assignments {
+            get {
+                return ResourceManager.GetString("ARCHIVE_Assignments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UPDATE Staff.Instructors
         ///SET IsArchived = 1
         ///WHERE InstructorId = @InstructorId.
@@ -68,6 +83,21 @@ namespace NBCC.Instructors.Properties {
         internal static string ARCHIVE_Instructors {
             get {
                 return ResourceManager.GetString("ARCHIVE_Instructors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO [College].[Assignments]
+        ///           ([InstructorId],[CourseId])
+        ///           
+        ///     VALUES (@InstructorId,@CourseId)
+        ///
+        ///
+        ///SELECT @@IDENTITY.
+        /// </summary>
+        internal static string INSERT_Assignments {
+            get {
+                return ResourceManager.GetString("INSERT_Assignments", resourceCulture);
             }
         }
         
@@ -87,6 +117,28 @@ namespace NBCC.Instructors.Properties {
         internal static string INSERT_Instructors {
             get {
                 return ResourceManager.GetString("INSERT_Instructors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT c.[AssignmentId]
+        ///      ,c.[CourseId]
+        ///      ,c.[InstructorId]
+        ///	  ,CO.CourseId
+        ///	  ,CO.CourseName
+        ///	  ,i.InstructorId
+        ///	  ,i.FirstName
+        ///	  ,i.LastName
+        ///	  ,i.Email
+        ///  FROM [College].[Assignments] c
+        ///  INNER JOIN College.Courses CO ON C.CourseId = CO.CourseId AND CO.IsArchived=0
+        ///  INNER JOIN Staff.Instructors i on i.InstructorId = c.InstructorId and i.IsArchived=0
+        ///  WHERE c.InstructorId = @InstructorId
+        ///  AND c.IsArchived = 0.
+        /// </summary>
+        internal static string SELECT_Assignments {
+            get {
+                return ResourceManager.GetString("SELECT_Assignments", resourceCulture);
             }
         }
         

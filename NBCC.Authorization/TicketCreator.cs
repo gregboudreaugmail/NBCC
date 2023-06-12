@@ -21,7 +21,7 @@ public sealed class TicketCreator : ITicketCreator
     }
     public async Task<AuthenticationTicket> GetTicket(string userName)
     {
-        var user = await AuthenticationRepository.GetUser(userName) ?? throw new NullReferenceException();
+        var user = await AuthenticationRepository.Get(userName) ?? throw new NullReferenceException();
 
         var authenticatedId = await AuthenticationLog.Log(user.UserId);
         AuthenticationSession.AssignAuthentication(authenticatedId);

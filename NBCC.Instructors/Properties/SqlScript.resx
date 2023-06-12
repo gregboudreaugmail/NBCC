@@ -118,11 +118,20 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ARCHIVE_Assignments" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\DataAccess\Queries\ARCHIVE_Assignments.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="ARCHIVE_Instructors" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\DataAccess\Queries\ARCHIVE_Instructors.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="INSERT_Assignments" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\DataAccess\Queries\INSERT_Assignments.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="INSERT_Instructors" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\DataAccess\Queries\INSERT_Instructors.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="SELECT_Assignments" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\DataAccess\Queries\SELECT_Assignments.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="SELECT_Instructors" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\DataAccess\Queries\SELECT_Instructors.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
