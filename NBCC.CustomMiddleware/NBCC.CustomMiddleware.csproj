@@ -1,13 +1,27 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+	  <TargetFramework>net7.0</TargetFramework>
+	  <Nullable>enable</Nullable>
+	  <RootNamespace>NBCC.Middleware</RootNamespace>
+	  <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+	  <Authors>Greg Boudreau</Authors>
+	  <Company>NBCC</Company>
+	  <Product>Demonstration</Product>
+	  <Description>Product Demonstration for middleware</Description>
+	  <NeutralLanguage>en-CA</NeutralLanguage>
+	  <AssemblyVersion>1.0.0.0</AssemblyVersion>
+	  <FileVersion>1.0.0.0</FileVersion>
+	  <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NBCC.Logging\NBCC.Logging.csproj" />
   </ItemGroup>
 
 </Project>

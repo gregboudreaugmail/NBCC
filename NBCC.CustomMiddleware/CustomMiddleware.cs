@@ -1,15 +1,56 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using NBCC.Middleware.Messages;
 
-namespace NBCC.WebApplicaion;
+namespace NBCC.Middleware;
 
 public class CustomMiddleware
 {
     RequestDelegate Next { get; }
+    ErrorMessage? ErrorMessage { get; }
+    ILoggerAsync? Logger { get; }
 
     public CustomMiddleware(RequestDelegate next) => Next = next;
+    public CustomMiddleware(RequestDelegate next, ErrorMessage errorMessage, ILoggerAsync logger)
+    {
+        Next = next;
+        ErrorMessage = errorMessage;
+        Logger = logger;
+    }
+    public CustomMiddleware(RequestDelegate next, ILoggerAsync logger)
+    {
+        Next = next;
+        Logger = logger;
+    }
+
+    public CustomMiddleware(RequestDelegate next, ErrorMessage errorMessage)
+    {
+        Next = next;
+        ErrorMessage = errorMessage;
+    }
 
     public async Task InvokeAsync(HttpContext httpContext)
     {
-        await Next(httpContext);
+        try
+        {
+            await Next(httpContext);
+        }
+        catch (SqlException ex)
+        {
+            int? messageId = null;
+            if (Logger != null)
+                messageId = await SqlExceptionHandler.LogSqlException(ex, Logger);
+            
+            await BadRequestResponse.HandleExceptionAsync(httpContext, 
+                ErrorMessage?.PersistenceError ?? string.Empty, messageId);
+        }
+        catch (Exception ex)
+        {
+            int? messageId = null;
+            if (Logger != null) 
+                await ExceptionHandler.LogException(ex, Logger);
+
+            await BadRequestResponse.HandleExceptionAsync(httpContext, 
+                ErrorMessage?.GeneralError ?? string.Empty, messageId);
+        }
     }
 }
+

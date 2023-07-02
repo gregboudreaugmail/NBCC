@@ -22,7 +22,7 @@ namespace NBCC.Courses.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class SqlScript {
+    public class SqlScript {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace NBCC.Courses.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NBCC.Courses.Properties.SqlScript", typeof(SqlScript).Assembly);
@@ -51,7 +51,7 @@ namespace NBCC.Courses.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,11 +61,39 @@ namespace NBCC.Courses.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to insert into courses values (@courseName).
+        ///   Looks up a localized string similar to UPDATE College.Courses
+        ///SET IsArchived = 1
+        ///WHERE CourseId = @CourseId.
         /// </summary>
-        internal static string INSERT_Courses {
+        public static string ARCHIVE_Courses {
+            get {
+                return ResourceManager.GetString("ARCHIVE_Courses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to INSERT INTO [College].[Courses]
+        ///           ([CourseName])
+        ///     VALUES
+        ///           (@instructorName)
+        ///SELECT @@IDENTITY.
+        /// </summary>
+        public static string INSERT_Courses {
             get {
                 return ResourceManager.GetString("INSERT_Courses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT [CourseId]
+        ///      ,[CourseName]
+        ///FROM College.Courses
+        ///WHERE IsArchived = 0
+        ///.
+        /// </summary>
+        public static string SELECT_Courses {
+            get {
+                return ResourceManager.GetString("SELECT_Courses", resourceCulture);
             }
         }
     }

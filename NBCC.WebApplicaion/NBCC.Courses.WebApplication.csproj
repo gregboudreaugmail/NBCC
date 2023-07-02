@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<nullable>enable</nullable>
+		<WarningsAsErrors>cs8643;CS8602;CS8603</WarningsAsErrors>
+		<RootNamespace>NBCC.Courses.WebApplication</RootNamespace>
+		<EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+		<Authors>Greg Boudreau</Authors>
+		<Company>NBCC</Company>
+		<Product>Demonstration</Product>
+		<Description>Product Demonstration</Description>
+		<NeutralLanguage>en-CA</NeutralLanguage>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AuthPermissions.AspNetCore" Version="4.1.0">
+		  <TreatAsUsed>true</TreatAsUsed>
+		</PackageReference>
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0">
+		  <TreatAsUsed>true</TreatAsUsed>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\NBCC.Authorization\NBCC.Authorization.csproj" />
+	  <ProjectReference Include="..\NBCC.Courses\NBCC.Courses.csproj" />
+	  <ProjectReference Include="..\NBCC.CQRS\NBCC.CQRS.csproj" />
+	  <ProjectReference Include="..\NBCC.CustomMiddleware\NBCC.CustomMiddleware.csproj" />
+	  <ProjectReference Include="..\NBCC.Logging\NBCC.Logging.csproj" />
+	  <ProjectReference Include="..\NBCC.WebRequest\NBCC.WebRequest.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Microsoft.AspNetCore.Authentication" />
+		<Using Include="NBCC.Authorization" />
+		<Using Include="System.Net.Mime" />
+		<Using Include="System" />
+		<Using Include="System.Collections.Generic" />
+		<Using Include="System.Linq" />
+		<Using Include="System.Threading.Tasks" />
+		<Using Include="Microsoft.AspNetCore.Authorization" />
+		<Using Include="Microsoft.AspNetCore.Mvc" />
+	</ItemGroup>
+
+</Project>

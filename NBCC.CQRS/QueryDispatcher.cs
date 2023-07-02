@@ -1,16 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿namespace NBCC.CQRS.Commands;
 
-namespace NBCC.Courses.Commands;
-
-public class QueryDispatcher : IQueryDispatcher
+public sealed class QueryDispatcher : IQueryDispatcher
 {
-    private readonly IServiceProvider _serviceProvider;
+    IServiceProvider ServiceProvider { get; }
 
-    public QueryDispatcher(IServiceProvider serviceProvider) => _serviceProvider = serviceProvider;
+    public QueryDispatcher(IServiceProvider serviceProvider) => ServiceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
 
     public async Task<TQueryResult> Dispatch<TQuery, TQueryResult>(TQuery query)
     {
-        var handler = _serviceProvider.GetRequiredService<IQueryHandler<TQuery, TQueryResult>>();
+        var handler = ServiceProvider.GetRequiredService<IQueryHandler<TQuery, TQueryResult>>();
         return await handler.Handle(query);
     }
 }

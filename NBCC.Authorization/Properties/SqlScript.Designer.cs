@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NBCC.Authorizaion.Properties {
+namespace NBCC.Authorization.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace NBCC.Authorizaion.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NBCC.Authorizaion.Properties.SqlScript", typeof(SqlScript).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NBCC.Authorization.Properties.SqlScript", typeof(SqlScript).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,70 @@ namespace NBCC.Authorizaion.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select [hash],[password] from users where username=@userName.
+        ///   Looks up a localized string similar to BEGIN TRY
+        ///
+        ///	BEGIN TRANSACTION  
+        ///
+        ///		Declare @UserID INT
+        ///		Declare @DefaultID INT
+        ///
+        ///		INSERT Secure.Users (UserName, Email)
+        ///		VALUES (@UserName, @Email)
+        ///
+        ///		SET @UserID = SCOPE_IDENTITY()
+        ///
+        ///		SELECT @DefaultID = RoleID FROM Secure.Roles WHERE IsDefault = 1
+        ///
+        ///		INSERT INTO [Secure].[UserRoles]([UserID],[RoleID])
+        ///		VALUES (@UserID, @DefaultID)
+        ///
+        ///		INSERT INTO Secure.Credentials (UserID, [Password], [Hash])
+        ///		VALUES (@UserID, @Password, @Hash)
+        ///
+        ///	COMMIT TRANSACTION
+        ///
+        ///END TRY  
+        ///BEGIN CATCH 
+        ///  IF  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string INSERT_User {
+            get {
+                return ResourceManager.GetString("INSERT_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select [hash],[password] from secure.Credentials c
+        ///inner join secure.users u 
+        ///on u.UserID = c.UserID
+        ///where username=@userName and IsActive=1.
         /// </summary>
         internal static string SELECT_passwordByUserName {
             get {
                 return ResourceManager.GetString("SELECT_passwordByUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT RoleID, RoleName, IsDefault FROM Secure.Roles
+        ///WHERE RoleID = @RoleID OR @RoleID IS NULL.
+        /// </summary>
+        internal static string SELECT_Roles {
+            get {
+                return ResourceManager.GetString("SELECT_Roles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select u.UserID, u.UserName,r.roleid, r.rolename, r.isdefault
+        ///from secure.roles r
+        ///inner join secure.UserRoles ur on r.RoleID = ur.RoleID
+        ///inner join secure.Users u on ur.UserID = u.UserID
+        ///where username=@userName.
+        /// </summary>
+        internal static string SELECT_userByUserName {
+            get {
+                return ResourceManager.GetString("SELECT_userByUserName", resourceCulture);
             }
         }
     }
