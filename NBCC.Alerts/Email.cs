@@ -7,7 +7,7 @@ public class Email : IAlerts
 {
     SmtpAlerts SmtpAlerts { get; }
 
-    public Email(SmtpAlerts smtpAlerts) => SmtpAlerts = smtpAlerts;
+    public Email(SmtpAlerts smtpAlerts) => SmtpAlerts = smtpAlerts ?? throw new ArgumentNullException(nameof(smtpAlerts));
 
     public async Task Send(IEnumerable<string> emails, string body, string subject)
     {

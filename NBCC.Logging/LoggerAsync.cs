@@ -1,6 +1,5 @@
 ﻿using NBCC.Logging.DataAccess;
 using NBCC.Logging.Models;
-using System;
 
 namespace NBCC.Logging;
 

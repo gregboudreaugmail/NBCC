@@ -9,7 +9,7 @@ public sealed class AssignmentsQueryHandler : IQueryHandler<AssignmentsQuery, IE
 {
     IAssignmentRepository AssignmentRepository { get; }
 
-    public AssignmentsQueryHandler(IAssignmentRepository assignmentRepository) => AssignmentRepository = assignmentRepository;
+    public AssignmentsQueryHandler(IAssignmentRepository assignmentRepository) => AssignmentRepository = assignmentRepository ?? throw new ArgumentNullException(nameof(assignmentRepository));
 
     public async Task<IEnumerable<Assignment>> Handle(AssignmentsQuery query) => await AssignmentRepository.Get(query.InstructorId);
 }

@@ -9,7 +9,7 @@ public sealed class CoursesQueryHandler : IQueryHandler<CoursesQuery, IEnumerabl
 {
     ICourseRepository CourseRepository { get; }
 
-    public CoursesQueryHandler(ICourseRepository courseRepository) => CourseRepository = courseRepository;
+    public CoursesQueryHandler(ICourseRepository courseRepository) => CourseRepository = courseRepository ?? throw new ArgumentNullException(nameof(courseRepository));
 
     public async Task<IEnumerable<Course>> Handle(CoursesQuery query) => await CourseRepository.Get();
 }

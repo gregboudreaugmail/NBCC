@@ -6,7 +6,7 @@ namespace NBCC.Instructors.CommandHandlers.Assignments;
 public class ArchiveAssignmentsCommandHandler : ICommandHandler<ArchiveAssignmentsCommand>
 {
     IAssignmentRepository AssignmentRepository { get; }
-    public ArchiveAssignmentsCommandHandler(IAssignmentRepository assignmentRepository) => AssignmentRepository = assignmentRepository;
+    public ArchiveAssignmentsCommandHandler(IAssignmentRepository assignmentRepository) => AssignmentRepository = assignmentRepository ?? throw new ArgumentNullException(nameof(assignmentRepository));
 
     public async Task Handle(ArchiveAssignmentsCommand command) => await AssignmentRepository.Archive(command.InstructorId, command.CourseId);
 }

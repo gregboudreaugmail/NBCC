@@ -7,7 +7,7 @@ public sealed class ArchiveInstructorCommandHandler : ICommandHandler<ArchiveIns
 {
     IInstructorRepository InstructorRepository { get; }
 
-    public ArchiveInstructorCommandHandler(IInstructorRepository instructorRepository) => InstructorRepository = instructorRepository;
+    public ArchiveInstructorCommandHandler(IInstructorRepository instructorRepository) => InstructorRepository = instructorRepository ?? throw new ArgumentNullException(nameof(instructorRepository));
 
     public async Task Handle(ArchiveInstructorCommand command) => await InstructorRepository.Archive(command.InstructorId);
 }

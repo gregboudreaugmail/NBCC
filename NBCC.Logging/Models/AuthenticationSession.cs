@@ -15,6 +15,6 @@ public sealed class AuthenticationSession : IAuthenticationSession
     }
 
     public void AssignAuthentication(int authenticationId) => 
-        HttpContextAccessor.HttpContext.Request.Headers.Add(CustomHeaders.AuthenticatedId, authenticationId.ToString());
+        HttpContextAccessor.HttpContext.Request.Headers.TryAdd(CustomHeaders.AuthenticatedId, authenticationId.ToString());
 
 }

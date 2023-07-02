@@ -1,44 +1,55 @@
 ﻿using Microsoft.AspNetCore.Http;
 using NBCC.Logging.Models;
 using Newtonsoft.Json;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Net.Mime;
-using System.Reflection;
 using System.Text;
-using System.Text.Json;
 
 namespace NBCC.WebRequest;
 
-public class Post: IPost
+public class Post : IPost
 {
     IHttpClientFactory HttpClientFactory { get; }
     IAuthenticationSession AuthenticationSession { get; }
+    IHttpContextAccessor HttpContextAccessorAccessor { get; }
 
-    public Post(IHttpClientFactory httpClientFactory, IAuthenticationSession authenticationSession)
+    public Post(IHttpClientFactory httpClientFactory, IAuthenticationSession authenticationSession, IHttpContextAccessor httpContextAccessorAccessor)
     {
-        HttpClientFactory = httpClientFactory;
-        AuthenticationSession = authenticationSession;
+        HttpClientFactory = httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory));
+        AuthenticationSession = authenticationSession ?? throw new ArgumentNullException(nameof(authenticationSession));
+        HttpContextAccessorAccessor = httpContextAccessorAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessorAccessor));
     }
 
-    public async Task PostAsync()
+    public async Task PostAsync(string requestUrl)
     {
-        await PostAsync(string.Empty);
+        await PostAsync(requestUrl, string.Empty);
     }
 
-    public async Task PostAsync<T>(T content)
+    public async Task PostAsync<T>(string requestUrl, T content)
     {
-        var json = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
-            
-        using var client = HttpClientFactory.CreateClient();
-        client.DefaultRequestHeaders.Add(CustomHeaders.AuthenticatedId, 
-            AuthenticationSession.AuthenticationId.ToString());
-        await client.PostAsync("https://localhost:7283/Instructors", json);
-    }
-}
+        var urlParameters = IsSimple(typeof(T)) ? JsonConvert.SerializeObject(content) : string.Empty;
+        var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"{requestUrl}{urlParameters}")
+        {
+            Headers =
+            {
+                { "Authorization", HttpContextAccessorAccessor.HttpContext.Request.Headers["Authorization"].ToString() },
+                { CustomHeaders.AuthenticatedId, AuthenticationSession.AuthenticationId.ToString() }
+            }
+        };
 
-public interface IPost
-{
-    Task PostAsync();
-    Task PostAsync<T>(T content);
+        if (!IsSimple(typeof(T)))
+            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
+
+        var response = await HttpClientFactory.CreateClient().SendAsync(requestMessage);
+
+    }
+
+    static bool IsSimple(Type type)
+    {
+        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+            return IsSimple(type.GetGenericArguments()[0]);
+
+        return type.IsPrimitive
+               || type.IsEnum
+               || type == typeof(string)
+               || type == typeof(decimal);
+    }
 }

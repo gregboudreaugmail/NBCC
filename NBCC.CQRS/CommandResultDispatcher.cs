@@ -4,7 +4,7 @@ public sealed class CommandResultDispatcher<TResult> : ICommandDispatcher<TResul
 {
     private IServiceProvider ServiceProvider { get; }
 
-    public CommandResultDispatcher(IServiceProvider serviceProvider) => ServiceProvider = serviceProvider;
+    public CommandResultDispatcher(IServiceProvider serviceProvider) => ServiceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
 
     public async Task<TResult> Dispatch<TCommand>(TCommand command)
     {

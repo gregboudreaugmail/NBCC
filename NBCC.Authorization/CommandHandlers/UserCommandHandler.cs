@@ -1,6 +1,5 @@
 ﻿using NBCC.Authorization.Commands;
 using NBCC.Authorization.DataAccess;
-using NBCC.CQRS.Commands;
 
 namespace NBCC.Authorization.CommandHandlers;
 

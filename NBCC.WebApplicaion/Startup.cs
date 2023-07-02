@@ -1,6 +1,6 @@
 ﻿using NBCC.Authorization.DataAccess;
 using NBCC.Authorization.Models;
-using NBCC.Authorization.ServiceExtentions;
+using NBCC.Authorization.ServiceExtensions;
 using NBCC.Courses.CommandHandlers;
 using NBCC.Courses.Commands;
 using NBCC.Courses.DataAccess;
@@ -35,6 +35,9 @@ public class Startup
         services.AddTransient<ICommandHandler<MakeCoursesCommand, int>, MakeCoursesCommandHandler>();
         services.AddTransient<IQueryHandler<CoursesQuery, IEnumerable<Course>>, CoursesQueryHandler>();
         services.AddTransient<ICommandHandler<ArchiveCoursesCommand>, ArchiveCoursesCommandHandler>();
+        services.TryAddSingleton(Configuration.
+            GetSection(nameof(Alerts)).Get<Alerts>() ?? new Alerts());
+        
         services.AddTransient<ITicketCreator, TicketCreator>();
         services.AddControllers();
         services.AddHttpClient();

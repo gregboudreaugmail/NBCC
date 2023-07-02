@@ -12,8 +12,8 @@ public class CourseDeletedCommandHandler : ICommandHandler<CourseDeleted>
 
     public CourseDeletedCommandHandler(IAlerts alerts, IInstructorRepository instructorRepository)
     {
-        Alerts = alerts;
-        InstructorRepository = instructorRepository;
+        Alerts = alerts ?? throw new ArgumentNullException(nameof(alerts));
+        InstructorRepository = instructorRepository ?? throw new ArgumentNullException(nameof(instructorRepository));
     }
 
     public async Task Handle(CourseDeleted command)

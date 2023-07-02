@@ -4,7 +4,7 @@ public sealed class QueryDispatcher : IQueryDispatcher
 {
     IServiceProvider ServiceProvider { get; }
 
-    public QueryDispatcher(IServiceProvider serviceProvider) => ServiceProvider = serviceProvider;
+    public QueryDispatcher(IServiceProvider serviceProvider) => ServiceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
 
     public async Task<TQueryResult> Dispatch<TQuery, TQueryResult>(TQuery query)
     {

@@ -5,7 +5,7 @@ using NBCC.Authorization.DataAccess;
 using NBCC.Authorization.Models;
 using NBCC.Authorization.Query;
 using NBCC.Authorization.QueryHandlers;
-using NBCC.Authorization.ServiceExtentions;
+using NBCC.Authorization.ServiceExtensions;
 using NBCC.CQRS.Commands;
 using NBCC.Logging.DataAccess;
 using NBCC.Logging.Models;

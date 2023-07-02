@@ -12,7 +12,7 @@ public sealed class Instructor
     }
 
     public int InstructorId { get; init; }
-    public string FirstName { get; init; }
-    public string LastName { get; init; }
-    public string Email { get; init; }
+    public string FirstName { get; init; } = null!;
+    public string LastName { get; init; } = null!;
+    public string Email { get; init; } = null!;
 }

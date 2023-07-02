@@ -1,6 +1,5 @@
 ﻿using NBCC.Authorization.Models;
 using NBCC.CQRS.Commands;
-using NBCC.Instructors.Commands;
 using NBCC.Instructors.Commands.Alerts;
 
 namespace NBCC.Instructors.WebApplication.Controllers

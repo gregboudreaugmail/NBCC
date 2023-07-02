@@ -2,7 +2,7 @@
 using NBCC.Authorization;
 using NBCC.Authorization.DataAccess;
 using NBCC.Authorization.Models;
-using NBCC.Authorization.ServiceExtentions;
+using NBCC.Authorization.ServiceExtensions;
 using NBCC.CQRS.Commands;
 using NBCC.Instructors.CommandHandlers;
 using NBCC.Instructors.CommandHandlers.Alerts;
@@ -49,7 +49,7 @@ public class Startup
         services.AddTransient<IAssignmentRepository, AssignmentRepository>();
         services.AddTransient<IAlerts, Email>();
         services.TryAddSingleton(Configuration.
-            GetSection("SmtpAlerts").Get<SmtpAlerts>() ?? new SmtpAlerts());
+            GetSection(nameof(SmtpAlerts)).Get<SmtpAlerts>() ?? new SmtpAlerts());
 
         services.AddTransient<ITicketCreator, TicketCreator>();
         services.AddControllers();

@@ -1,4 +1,5 @@
-﻿using NBCC.Authorization.DataAccess;
+﻿using Microsoft.AspNetCore.Http;
+using NBCC.Authorization.DataAccess;
 using NBCC.Authorization.Models;
 using NBCC.Logging.DataAccess;
 using NBCC.Logging.Models;
@@ -10,20 +11,24 @@ public sealed class TicketCreator : ITicketCreator
     IAuthenticationRepository AuthenticationRepository { get; }
     IAuthenticationSession AuthenticationSession { get; }
     IAuthenticationLog AuthenticationLog { get; }
+    IHttpContextAccessor HttpContextAccessorAccessor { get; }
 
     public TicketCreator(IAuthenticationRepository authenticationRepository,
         IAuthenticationSession authenticationSession,
-        IAuthenticationLog authenticationLog)
+        IAuthenticationLog authenticationLog, IHttpContextAccessor httpContextAccessorAccessor)
     {
         AuthenticationRepository = authenticationRepository;
         AuthenticationSession = authenticationSession;
         AuthenticationLog = authenticationLog;
+        HttpContextAccessorAccessor = httpContextAccessorAccessor;
     }
     public async Task<AuthenticationTicket> GetTicket(string userName)
     {
         var user = await AuthenticationRepository.Get(userName) ?? throw new NullReferenceException();
 
-        var authenticatedId = await AuthenticationLog.Log(user.UserId);
+        var headerAuthenticatedId = HttpContextAccessorAccessor.HttpContext?.Request.Headers[CustomHeaders.AuthenticatedId].ToString();
+        var authenticatedId = string.IsNullOrEmpty(headerAuthenticatedId) ? await AuthenticationLog.Log(user.UserId) : int.Parse(headerAuthenticatedId);
+
         AuthenticationSession.AssignAuthentication(authenticatedId);
 
         var claims = new Collection<Claim>
