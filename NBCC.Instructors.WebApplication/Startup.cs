@@ -48,6 +48,8 @@ public class Startup
         services.AddTransient<ICommandHandler<CourseDeleted>, CourseDeletedCommandHandler>();
         services.AddTransient<IAssignmentRepository, AssignmentRepository>();
         services.AddTransient<IAlerts, Email>();
+        services.TryAddSingleton(Configuration.
+            GetSection("SmtpAlerts").Get<SmtpAlerts>() ?? new SmtpAlerts());
 
         services.AddTransient<ITicketCreator, TicketCreator>();
         services.AddControllers();

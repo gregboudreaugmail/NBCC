@@ -2,5 +2,5 @@
 
 public interface IAlerts
 {
-    Task Send(int templateId);
+    Task Send(IEnumerable<string> emails, string body, string subject);
 }

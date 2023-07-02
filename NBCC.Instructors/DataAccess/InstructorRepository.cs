@@ -26,4 +26,10 @@ public sealed class InstructorRepository : IInstructorRepository
         await using SqlConnection connection = new(Connection.Value);
         return await connection.QueryAsync<Instructor>(SqlScript.SELECT_Instructors);
     }
+
+    public async Task<IEnumerable<Instructor>> GetByCourse(int courseId)
+    {
+        await using SqlConnection connection = new(Connection.Value);
+        return await connection.QueryAsync<Instructor>(SqlScript.SELECT_InstructorsByCourse, new { courseId });
+    }
 }

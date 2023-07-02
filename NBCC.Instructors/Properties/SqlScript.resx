@@ -124,6 +124,12 @@
   <data name="ARCHIVE_Instructors" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\DataAccess\Queries\ARCHIVE_Instructors.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="CourseDeletedMessage" xml:space="preserve">
+    <value>This is an automated message to inform you that a course assigned to you has been deleted.</value>
+  </data>
+  <data name="CourseDeletedSubject" xml:space="preserve">
+    <value>Course Deleted</value>
+  </data>
   <data name="INSERT_Assignments" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\DataAccess\Queries\INSERT_Assignments.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
@@ -135,5 +141,8 @@
   </data>
   <data name="SELECT_Instructors" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\DataAccess\Queries\SELECT_Instructors.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="SELECT_InstructorsByCourse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\DataAccess\Queries\SELECT_InstructorsByCourse.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
 </root>

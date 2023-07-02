@@ -87,6 +87,24 @@ namespace NBCC.Instructors.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This is an automated message to inform you that a course assigned to you has been deleted..
+        /// </summary>
+        internal static string CourseDeletedMessage {
+            get {
+                return ResourceManager.GetString("CourseDeletedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Course Deleted.
+        /// </summary>
+        internal static string CourseDeletedSubject {
+            get {
+                return ResourceManager.GetString("CourseDeletedSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to INSERT INTO [College].[Assignments]
         ///           ([InstructorId],[CourseId])
         ///           
@@ -155,6 +173,23 @@ namespace NBCC.Instructors.Properties {
         internal static string SELECT_Instructors {
             get {
                 return ResourceManager.GetString("SELECT_Instructors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SELECT i.InstructorId
+        ///	  ,i.FirstName
+        ///	  ,i.LastName
+        ///	  ,i.Email
+        ///  FROM [College].[Assignments] c
+        ///  INNER JOIN College.Courses CO ON C.CourseId = CO.CourseId AND CO.IsArchived=0
+        ///  INNER JOIN Staff.Instructors i on i.InstructorId = c.InstructorId and i.IsArchived=0
+        ///  WHERE co.courseid = @CourseId
+        ///  AND c.IsArchived = 0.
+        /// </summary>
+        internal static string SELECT_InstructorsByCourse {
+            get {
+                return ResourceManager.GetString("SELECT_InstructorsByCourse", resourceCulture);
             }
         }
     }
