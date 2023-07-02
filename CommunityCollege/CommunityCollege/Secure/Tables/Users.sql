@@ -7,3 +7,10 @@
     CONSTRAINT [UQ__Users__F3DBC5729FDACB2A] UNIQUE NONCLUSTERED ([UserName] ASC)
 );
 
+
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [UniqueEmailUsers]
+    ON [Secure].[Users]([Email] ASC) WHERE ([isactive]=(1));
+

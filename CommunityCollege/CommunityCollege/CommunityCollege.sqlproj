@@ -127,6 +127,8 @@
     <Folder Include="College\" />
     <Folder Include="College\Tables\" />
     <Folder Include="Security\" />
+    <Folder Include="Staff\" />
+    <Folder Include="Staff\Tables\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Secure\Tables\Users.sql" />
@@ -141,5 +143,9 @@
     <Build Include="Security\Logging.sql" />
     <Build Include="Security\Secure.sql" />
     <Build Include="Security\Users.sql" />
+    <Build Include="College\Tables\Assignments.sql" />
+    <Build Include="Staff\Tables\Instructors.sql" />
+    <Build Include="Security\Staff.sql" />
+    <Build Include="Security\Instructors.sql" />
   </ItemGroup>
 </Project>
