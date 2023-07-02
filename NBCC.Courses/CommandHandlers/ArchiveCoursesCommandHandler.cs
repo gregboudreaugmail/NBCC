@@ -13,9 +13,9 @@ public sealed class ArchiveCoursesCommandHandler : ICommandHandler<ArchiveCourse
 
     public ArchiveCoursesCommandHandler(ICourseRepository courseRepository, IPost post, Alerts alerts)
     {
-        CourseRepository = courseRepository;
-        Post = post;
-        Alerts = alerts;
+        CourseRepository = courseRepository ?? throw new ArgumentNullException(nameof(courseRepository));
+        Post = post ?? throw new ArgumentNullException(nameof(post));
+        Alerts = alerts ?? throw new ArgumentNullException(nameof(alerts));
     }
 
     public async Task Handle(ArchiveCoursesCommand command)
