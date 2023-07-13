@@ -5,6 +5,13 @@ namespace NBCC.Alerts;
 
 public class Email : IAlerts
 {
+    /*
+     * Note 24
+     * Using the 3rd party
+     * you'll want to keep your 3rd parties isolated like this on the condition that it becomes
+     * obsolete or stops working for whatever reason.  You don't want to muck around in your
+     * application's code when that happens as it'll make more chances for bugs.
+     */
     SmtpAlerts SmtpAlerts { get; }
 
     public Email(SmtpAlerts smtpAlerts) => SmtpAlerts = smtpAlerts ?? throw new ArgumentNullException(nameof(smtpAlerts));

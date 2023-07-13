@@ -22,6 +22,15 @@ public sealed class TicketCreator : ITicketCreator
         AuthenticationLog = authenticationLog;
         HttpContextAccessorAccessor = httpContextAccessorAccessor;
     }
+    /*
+     * Note 27
+     * Assigning claims
+     * We may have seen in the web applications' controllers that they had a line that read
+     * [Authorize(Roles = $"{Roles.Administrator},{Roles.Instructor}")]
+     * meaning those calls are only accessible to users part of the admin or instructor role
+     * Here is where we make that determination.  A lot of this code is boiler plate.  At least
+     * from the Claims collection and down.
+     */
     public async Task<AuthenticationTicket> GetTicket(string userName)
     {
         var user = await AuthenticationRepository.Get(userName) ?? throw new NullReferenceException();

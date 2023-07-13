@@ -3,26 +3,30 @@ using NBCC.Logging.Models;
 using Newtonsoft.Json;
 using System.Text;
 
-namespace NBCC.WebRequest;
+namespace NBCC.Requests;
 
-public class Post : IPost
+public class WebRequest : IWebRequest
 {
     IHttpClientFactory HttpClientFactory { get; }
     IAuthenticationSession AuthenticationSession { get; }
     IHttpContextAccessor HttpContextAccessorAccessor { get; }
 
-    public Post(IHttpClientFactory httpClientFactory, IAuthenticationSession authenticationSession, IHttpContextAccessor httpContextAccessorAccessor)
+    public WebRequest(IHttpClientFactory httpClientFactory, IAuthenticationSession authenticationSession, IHttpContextAccessor httpContextAccessorAccessor)
     {
         HttpClientFactory = httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory));
         AuthenticationSession = authenticationSession ?? throw new ArgumentNullException(nameof(authenticationSession));
         HttpContextAccessorAccessor = httpContextAccessorAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessorAccessor));
     }
 
-    public async Task PostAsync(string requestUrl)
-    {
-        await PostAsync(requestUrl, string.Empty);
-    }
+    public async Task PostAsync(string requestUrl) => await PostAsync(requestUrl, string.Empty);
 
+    /*
+     * Note 22
+     * Authorizing the external web application
+     * Aside from the basic code to post to an address, it's important to note that I'm attaching my
+     * authorization header to the request as well as the authentication id we get from the database
+     * to make a seamless interaction between the applications
+     */
     public async Task PostAsync<T>(string requestUrl, T content)
     {
         var urlParameters = IsSimple(typeof(T)) ? JsonConvert.SerializeObject(content) : string.Empty;
@@ -38,7 +42,7 @@ public class Post : IPost
         if (!IsSimple(typeof(T)))
             requestMessage.Content = new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
 
-        var response = await HttpClientFactory.CreateClient().SendAsync(requestMessage);
+        await HttpClientFactory.CreateClient().SendAsync(requestMessage);
 
     }
 

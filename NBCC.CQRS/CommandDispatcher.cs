@@ -1,6 +1,14 @@
 ﻿using NBCC.Logging.Models;
 namespace NBCC.CQRS.Commands;
 
+/*
+ * Note 29
+ * Auditing each call
+ * Another benefit of having an in house CQRS system is that it makes auditing very easy.
+ * Without needing the developer to copy and paste logging code on every function they make,
+ * we can make the dispatcher log.
+ *
+ */
 public sealed class CommandDispatcher : ICommandDispatcher
 {
     IServiceProvider ServiceProvider { get; }

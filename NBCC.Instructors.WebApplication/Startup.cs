@@ -20,7 +20,7 @@ using NBCC.Logging.DataAccess;
 using NBCC.Logging.Models;
 using NBCC.Middleware;
 using NBCC.Middleware.Messages;
-using NBCC.WebRequest;
+using NBCC.Requests;
 using AuthorizationConnection = NBCC.Authorization.DataAccess.Connection;
 using InstructorsConnection = NBCC.Instructors.DataAccess.Connection;
 using LoggingConnection = NBCC.Logging.DataAccess.Connection;
@@ -54,7 +54,7 @@ public class Startup
         services.AddTransient<ITicketCreator, TicketCreator>();
         services.AddControllers();
         services.AddHttpClient();
-        services.AddTransient<IPost, Post>();
+        services.AddTransient<IWebRequest, WebRequest>();
         services.AddHttpContextAccessor();
         services.AddEndpointsApiExplorer();
         services.AddTransient<IUser, User>();

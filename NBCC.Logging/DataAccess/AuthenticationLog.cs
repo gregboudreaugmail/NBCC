@@ -1,6 +1,13 @@
 ﻿using NBCC.Logging.Properties;
 namespace NBCC.Logging.DataAccess;
 
+/*
+ * Note 28
+ * Auditing
+ * Having a trail of what happens in your app when it goes live is crucial.  I have setup
+ * three types of auditing.  Authentication, to know how logged in, exceptions to capture
+ * errors and interactions to know how the user is navigating the app
+ */
 public sealed class AuthenticationLog : IAuthenticationLog
     {
         Connection Connection { get; }

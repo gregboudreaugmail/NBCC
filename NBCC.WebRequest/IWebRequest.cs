@@ -1,6 +1,6 @@
-﻿namespace NBCC.WebRequest;
+﻿namespace NBCC.Requests;
 
-public interface IPost
+public interface IWebRequest
 {
     Task PostAsync(string requestUrl);
     Task PostAsync<T>(string requestUrl, T content);

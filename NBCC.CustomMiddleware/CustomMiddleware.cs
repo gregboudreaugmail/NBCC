@@ -27,6 +27,14 @@ public class CustomMiddleware
         ErrorMessage = errorMessage;
     }
 
+    /*
+     * Note 30
+     * Exceptions
+     * Finally, we're going to cover exception logging.  You may have noticed that there
+     * aren't any try/catch blocks in my code.  That's because any exception will spill
+     * over here in the custom middleware where I can handle it appropriately.  For SQL
+     * related errors, I can add a little more detail then a general exception for example.
+     */
     public async Task InvokeAsync(HttpContext httpContext)
     {
         try

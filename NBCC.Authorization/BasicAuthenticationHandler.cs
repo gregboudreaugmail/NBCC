@@ -3,6 +3,13 @@ using NBCC.Authorization.Models;
 
 namespace NBCC.Authorization;
 
+/*
+ * Note 25
+ * Authentication
+ * The blueprint for authentication.  Inherit the AuthenticationHandler, call HandleAuthenticateAsync
+ * and return an AuthenticateResult.  The logic in which you determine it's a pass or fails is
+ * on you though.
+ */
 public sealed class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
     IAuthenticationRepository AuthenticationRepository { get; }
@@ -34,6 +41,15 @@ public sealed class BasicAuthenticationHandler : AuthenticationHandler<Authentic
     {
         try
         {
+            /*
+             * Note 26
+             * Verifying the username and password
+             * We're going to be storing our password in the database encrypted which means this
+             * won't be a one to one match.  Instead we're going to pull the saved password via the
+             * email, encrypt our current password passed in through the login and see if THEY match.
+             * Note that auth isn't a traditional controller/body style call. The information is put
+             * into the header so the below code is extracting the given credentials from the header
+             */
             AuthorizedUser = ExtractUserNameAndPassword();
 
             var authenticated = await AuthenticationRepository.AuthenticateUser(AuthorizedUser.UserName, AuthorizedUser.Password);
